@@ -1,0 +1,71 @@
+
+{% extends 'base.html' %}
+{% block title %}My Booking — Groom Suite{% endblock %}
+
+{% block content %}
+<div class="portal-header">
+  <div>
+    <h1 class="portal-greeting">Welcome, <span>{{ current_user.name }}</span></h1>
+    <p class="portal-meta">Your Groom Suite Experience</p>
+  </div>
+  {% if booking %}
+  <div class="status-badge status-{{ booking.status }}">
+    <span class="status-dot"></span>
+    {{ booking.status|capitalize }}
+  </div>
+  {% endif %}
+</div>
+
+<div class="portal-body">
+  {% if booking %}
+
+  <div class="portal-card">
+    <div class="portal-card-title">Booking Details</div>
+    <div class="detail-row">
+      <span class="detail-label">Wedding Date</span>
+      <span class="detail-value gold">{{ booking.wedding_date }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Venue</span>
+      <span class="detail-value">{{ booking.venue }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Party Size</span>
+      <span class="detail-value">{{ booking.party_size }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Package</span>
+      <span class="detail-value gold">{{ booking.package or 'TBD' }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Add-ons</span>
+      <span class="detail-value">{{ booking.addons or 'None' }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Notes</span>
+      <span class="detail-value">{{ booking.notes or '—' }}</span>
+    </div>
+  </div>
+
+  <div class="portal-card">
+    <div class="portal-card-title">Your Party</div>
+    {% if booking.party_members %}
+      {% for member in booking.party_members %}
+      <div class="detail-row">
+        <span class="detail-label">{{ member.name }}</span>
+        <span class="detail-value">{{ member.service }}</span>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p style="color:var(--white-dim);font-size:0.75rem;">No party members added yet.</p>
+    {% endif %}
+  </div>
+
+  {% else %}
+  <div class="empty-state">
+    <p>You don't have a booking yet.</p>
+    <a href="{{ url_for('index') }}" class="btn-gold" style="margin-top:1.5rem;width:auto;padding:0.75rem 2rem;">Submit an Inquiry</a>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
