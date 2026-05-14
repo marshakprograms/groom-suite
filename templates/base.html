@@ -15,7 +15,7 @@
       {% if current_user.is_authenticated %}
         {% if current_user.role == 'admin' %}
           <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
-          <a href="{{ url_for('admin_calendar') }}">Calendar</a>
+          <a href="#">Calendar</a>
         {% else %}
           <a href="{{ url_for('portal') }}">My Booking</a>
         {% endif %}
