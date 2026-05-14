@@ -1,0 +1,76 @@
+
+{% extends 'base.html' %}
+{% block title %}Book Your Experience — Groom Suite{% endblock %}
+
+{% block content %}
+<div class="inquiry-wrapper">
+  <div class="inquiry-left">
+    <p class="section-eyebrow">Ready to Book?</p>
+    <h1 class="inquiry-title">Elevate<br><em>Your Big Day</em></h1>
+    <div class="gold-line-left"></div>
+    <p class="inquiry-body">Let's create a premium grooming experience you and your crew will never forget. Fill out the form and we'll be in touch within 24 hours.</p>
+    <div class="inquiry-contact">
+      <span>Or call / text directly</span>
+      <strong>(919) 444-5296</strong>
+    </div>
+  </div>
+
+  <div class="inquiry-form">
+    <form method="POST" action="{{ url_for('inquiry') }}">
+      <div class="form-row">
+        <div class="form-field">
+          <label>Your Name</label>
+          <input type="text" name="name" placeholder="Marcus Johnson" required>
+        </div>
+        <div class="form-field">
+          <label>Email</label>
+          <input type="email" name="email" placeholder="marcus@email.com" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-field">
+          <label>Wedding Date</label>
+          <input type="date" name="wedding_date" required>
+        </div>
+        <div class="form-field">
+          <label>Party Size</label>
+          <select name="party_size" required>
+            <option value="">Select size</option>
+            <option value="1">1 — Just the groom</option>
+            <option value="3">2–4 — Small party</option>
+            <option value="6">5–8 — Full squad</option>
+            <option value="9">9+ — Large party</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-field">
+        <label>Venue / Location</label>
+        <input type="text" name="venue" placeholder="The Durham Hotel, Durham NC" required>
+      </div>
+      <div class="form-field">
+        <label>Package</label>
+        <select name="package">
+          <option value="">Select a package</option>
+          <option value="Groom Only">Groom Only</option>
+          <option value="Group Package">Group Package</option>
+          <option value="Full Squad">Full Squad</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Add-ons</label>
+        <select name="addons">
+          <option value="None">None</option>
+          <option value="Cigars">Cigars</option>
+          <option value="Whiskey Service">Whiskey Service</option>
+          <option value="Cigars + Whiskey">Cigars + Whiskey</option>
+        </select>
+      </div>
+      <div class="form-field">
+        <label>Tell us about your event</label>
+        <textarea name="notes" placeholder="Any special requests, preferred start time..."></textarea>
+      </div>
+      <button type="submit" class="btn-gold">Send Inquiry</button>
+    </form>
+  </div>
+</div>
+{% endblock %}

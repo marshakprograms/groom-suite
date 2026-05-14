@@ -55,3 +55,47 @@ def register_routes(app):
             return redirect(url_for('admin_dashboard'))
         booking = Booking.query.filter_by(user_id=current_user.id).first()
         return render_template('portal.html', booking=booking)
+    
+    @app.route('/inquiry', methods=['GET', 'POST'])
+    def inquiry():
+        if request.method == 'POST':
+            name = request.form.get('name')
+            email = request.form.get('email')
+            wedding_date = request.form.get('wedding_date')
+            venue = request.form.get('venue')
+            party_size = request.form.get('party_size')
+            package = request.form.get('package')
+            addons = request.form.get('addons')
+            notes = request.form.get('notes')
+
+            existing_user = User.query.filter_by(email=email).first()
+            if not existing_user:
+                from werkzeug.security import generate_password_hash
+                new_user = User(
+                    name=name,
+                    email=email,
+                    password=generate_password_hash('changeme123'),
+                    role='client'
+                )
+                db.session.add(new_user)
+                db.session.flush()
+                user_id = new_user.id
+            else:
+                user_id = existing_user.id
+
+            booking = Booking(
+                wedding_date=wedding_date,
+                venue=venue,
+                party_size=int(party_size),
+                package=package,
+                addons=addons,
+                notes=notes,
+                status='pending',
+                user_id=user_id
+            )
+            db.session.add(booking)
+            db.session.commit()
+            flash('Inquiry submitted! We will be in touch within 24 hours.')
+            return redirect(url_for('inquiry'))
+
+        return render_template('inquiry.html')
