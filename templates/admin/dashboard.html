@@ -49,7 +49,7 @@
           <div class="client-name">{{ booking.client.name }}</div>
           <div class="client-email">{{ booking.client.email }}</div>
         </td>
-        <td>{{ booking.wedding_date }}</td>
+        <td>{{ booking.wedding_date | format_date }}</td>
         <td>{{ booking.venue }}</td>
         <td>{{ booking.party_size }}</td>
         <td>

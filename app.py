@@ -7,6 +7,15 @@ app = Flask(__name__)
 app.config.from_object(Config)
 
 db.init_app(app)
+
+from datetime import datetime
+
+@app.template_filter('format_date')
+def format_date(value):
+    try:
+        return datetime.strptime(value, '%Y-%m-%d').strftime('%B %d, %Y')
+    except:
+        return value
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
