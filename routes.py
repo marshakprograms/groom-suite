@@ -56,6 +56,10 @@ def register_routes(app):
         booking = Booking.query.filter_by(user_id=current_user.id).first()
         return render_template('portal.html', booking=booking)
     
+    @app.route('/')
+    def index():
+        return render_template('index.html')
+    
     @app.route('/inquiry', methods=['GET', 'POST'])
     def inquiry():
         if request.method == 'POST':

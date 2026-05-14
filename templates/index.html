@@ -1,0 +1,98 @@
+
+{% extends 'base.html' %}
+{% block title %}Groom Suite — Mobile Luxury Grooming{% endblock %}
+
+{% block content %}
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Mobile Grooming · Premium Experience</p>
+    <h1 class="hero-title">We Elevate<br><em>Your Big Day</em></h1>
+    <p class="hero-body">Luxury grooming for the modern man. We come to you, so you can focus on making unforgettable memories with your crew.</p>
+    <div class="hero-cta">
+      <a href="{{ url_for('inquiry') }}" class="btn-gold">Book Your Experience</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES STRIP -->
+<div class="features-strip">
+  <div class="feature-item">
+    <div class="feature-icon">✦</div>
+    <div class="feature-label">We Come to You</div>
+    <div class="feature-desc">On-site grooming for weddings & special events</div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">◈</div>
+    <div class="feature-label">Premium Experience</div>
+    <div class="feature-desc">Top-tier service with whiskey, cigars & relaxation</div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">◉</div>
+    <div class="feature-label">Professional Results</div>
+    <div class="feature-desc">Sharp, clean, and photo-ready from start to finish</div>
+  </div>
+  <div class="feature-item">
+    <div class="feature-icon">❖</div>
+    <div class="feature-label">Groom Squad Ready</div>
+    <div class="feature-desc">We handle your whole crew so everyone looks best</div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <p class="section-eyebrow">Our Services</p>
+  <h2 class="section-title">Premium Grooming Services</h2>
+  <div class="gold-line"></div>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">✂</div>
+      <div class="service-name">Haircut & Style</div>
+      <div class="service-desc">Precision cuts and styles tailored to your face shape and wedding aesthetic.</div>
+      <div class="service-price">From $65</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">◈</div>
+      <div class="service-name">Beard Grooming</div>
+      <div class="service-desc">Shape, line-up, and full beard care for a clean defined finish.</div>
+      <div class="service-price">From $45</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">✦</div>
+      <div class="service-name">Straight Razor Shave</div>
+      <div class="service-desc">Classic hot towel straight razor shave for the smoothest finish.</div>
+      <div class="service-price">From $55</div>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">❖</div>
+      <div class="service-name">Group Packages</div>
+      <div class="service-desc">Special pricing for full groom party — groomsmen & VIPs included.</div>
+      <div class="service-price">From $250</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <p class="section-eyebrow">Ready to Book?</p>
+    <h2 class="cta-title">Elevate <em>Your Big Day</em></h2>
+    <div class="gold-line"></div>
+    <p class="cta-body">Let's create a premium grooming experience you and your crew will never forget.</p>
+    <a href="{{ url_for('inquiry') }}" class="btn-gold" style="width:auto;padding:0.85rem 3rem;">Book Your Experience</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div>
+    <div class="footer-logo">Groom Suite</div>
+    <div class="footer-tagline">Luxury · Convenience · Confidence</div>
+  </div>
+  <div class="footer-copy">© 2025 Groom Suite Mobile Grooming · Durham, NC</div>
+</footer>
+
+{% endblock %}

@@ -26,9 +26,5 @@ with app.app_context():
     auth_routes(app, login_manager)
     app_routes(app)
 
-@app.route('/')
-def index():
-    return 'Groom Suite is live!'
-
 if __name__ == '__main__':
     app.run(debug=True)

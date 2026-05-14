@@ -411,4 +411,174 @@ body {
   resize: vertical;
   min-height: 100px;
 }
+
 .form-field select option { background: var(--black-3); }
+
+/* HOMEPAGE */
+.hero {
+  min-height: 92vh;
+  display: flex;
+  align-items: center;
+  padding: 0 3rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(105deg, rgba(10,10,10,0.97) 45%, rgba(10,10,10,0.6) 100%),
+    radial-gradient(ellipse at 70% 50%, rgba(201,168,76,0.08) 0%, transparent 60%);
+}
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 580px;
+}
+.hero-eyebrow {
+  font-size: 0.6rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  margin-bottom: 1.5rem;
+}
+.hero-title em { font-style: italic; color: var(--gold); }
+.hero-body {
+  font-size: 0.82rem;
+  line-height: 1.9;
+  color: var(--white-dim);
+  max-width: 440px;
+  margin-bottom: 2.5rem;
+  font-weight: 300;
+}
+.hero-cta { display: flex; gap: 1rem; align-items: center; }
+
+.btn-outline {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  background: transparent;
+  color: var(--gold);
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  border: 1px solid var(--gold);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-outline:hover { background: var(--gold); color: var(--black); }
+
+.features-strip {
+  background: var(--black-2);
+  border-top: 1px solid rgba(201,168,76,0.15);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+  padding: 2.5rem 3rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+.feature-item {
+  padding: 0 2rem;
+  border-right: 1px solid rgba(201,168,76,0.12);
+  text-align: center;
+}
+.feature-item:first-child { padding-left: 0; }
+.feature-item:last-child { border-right: none; padding-right: 0; }
+.feature-icon { font-size: 1.4rem; color: var(--gold); margin-bottom: 0.6rem; }
+.feature-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+}
+.feature-desc { font-size: 0.7rem; color: var(--white-dim); line-height: 1.6; font-weight: 300; }
+
+.services-section {
+  padding: 6rem 3rem;
+  text-align: center;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  color: var(--white);
+  margin-bottom: 0.5rem;
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: rgba(201,168,76,0.1);
+  margin-top: 3rem;
+  border: 1px solid rgba(201,168,76,0.1);
+  text-align: left;
+}
+.service-card {
+  background: var(--black-2);
+  padding: 2.5rem 2rem;
+  transition: background 0.2s;
+}
+.service-card:hover { background: var(--black-3); }
+.service-icon { font-size: 2rem; color: var(--gold); margin-bottom: 1rem; }
+.service-name {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  color: var(--gold);
+  margin-bottom: 0.5rem;
+}
+.service-desc { font-size: 0.7rem; color: var(--white-dim); line-height: 1.7; font-weight: 300; }
+.service-price {
+  margin-top: 1rem;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--gold-dim);
+  text-transform: uppercase;
+}
+
+.cta-section {
+  background: var(--black-2);
+  border-top: 1px solid rgba(201,168,76,0.1);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+  padding: 6rem 3rem;
+  text-align: center;
+}
+.cta-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 300;
+  margin-bottom: 0.5rem;
+}
+.cta-title em { font-style: italic; color: var(--gold); }
+.cta-body {
+  font-size: 0.78rem;
+  color: var(--white-dim);
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+
+.footer {
+  background: var(--black);
+  border-top: 1px solid rgba(201,168,76,0.15);
+  padding: 2rem 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.footer-logo {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--gold);
+  letter-spacing: 0.2em;
+}
+.footer-tagline { font-size: 0.62rem; color: var(--white-dim); letter-spacing: 0.1em; margin-top: 0.2rem; }
+.footer-copy { font-size: 0.6rem; color: var(--black-5); }
