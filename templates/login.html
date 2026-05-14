@@ -1,0 +1,30 @@
+
+{% extends 'base.html' %}
+{% block title %}Login — Groom Suite{% endblock %}
+
+{% block content %}
+<div class="auth-wrapper">
+  <div class="auth-card">
+    <div class="auth-logo">♛</div>
+    <h1 class="auth-title">Welcome Back</h1>
+    <p class="auth-sub">Sign in to your Groom Suite account</p>
+    <div class="gold-line"></div>
+
+    <form method="POST" action="{{ url_for('login') }}">
+      <div class="form-field">
+        <label>Email</label>
+        <input type="email" name="email" placeholder="your@email.com" required>
+      </div>
+      <div class="form-field">
+        <label>Password</label>
+        <input type="password" name="password" placeholder="••••••••" required>
+      </div>
+      <button type="submit" class="btn-gold">Sign In</button>
+    </form>
+
+    <p class="auth-footer">
+      <a href="{{ url_for('index') }}">← Back to Home</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

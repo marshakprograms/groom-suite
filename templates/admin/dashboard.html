@@ -1,0 +1,80 @@
+
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard — Groom Suite{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <div>
+    <h1 class="admin-title">Admin <span>Dashboard</span></h1>
+    <p class="admin-meta">Groom Suite · All Bookings</p>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card">
+    <div class="stat-value">{{ total }}</div>
+    <div class="stat-label">Total Bookings</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ pending }}</div>
+    <div class="stat-label">Pending Review</div>
+  </div>
+  <div class="stat-card">
+    <div class="stat-value">{{ confirmed }}</div>
+    <div class="stat-label">Confirmed</div>
+  </div>
+</div>
+
+<div class="admin-body">
+  <div class="table-header">
+    <div class="table-title">All Bookings</div>
+  </div>
+
+  {% if bookings %}
+  <table class="bookings-table">
+    <thead>
+      <tr>
+        <th>Client</th>
+        <th>Wedding Date</th>
+        <th>Venue</th>
+        <th>Party Size</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for booking in bookings %}
+      <tr>
+        <td>
+          <div class="client-name">{{ booking.client.name }}</div>
+          <div class="client-email">{{ booking.client.email }}</div>
+        </td>
+        <td>{{ booking.wedding_date }}</td>
+        <td>{{ booking.venue }}</td>
+        <td>{{ booking.party_size }}</td>
+        <td>
+          <span class="badge badge-{{ booking.status }}">
+            ● {{ booking.status|capitalize }}
+          </span>
+        </td>
+        <td>
+          <div class="action-btns">
+            {% if booking.status == 'pending' %}
+            <a href="{{ url_for('confirm_booking', id=booking.id) }}" class="action-btn action-confirm">Confirm</a>
+            <a href="{{ url_for('reject_booking', id=booking.id) }}" class="action-btn action-reject">Reject</a>
+            {% else %}
+            <span class="action-btn" style="opacity:0.4;cursor:default;">{{ booking.status|capitalize }}</span>
+            {% endif %}
+          </div>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+  <div class="empty-state">
+    <p>No bookings yet. They'll appear here once clients submit inquiries.</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock %}
