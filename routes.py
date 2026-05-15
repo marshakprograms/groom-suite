@@ -65,7 +65,7 @@ def register_routes(app):
         if booking:
             current_count = len(booking.party_members)
             if current_count >= booking.party_size:
-                flash(f'You have reached your maximum party size of {booking.party_size} members.')
+                flash(f'ALERT: You have reached your maximum party size of {booking.party_size} members. To add more, please edit your booking to increase your party size.')
                 return redirect(url_for('portal'))
             name = request.form.get('member_name')
             service = request.form.get('member_service')
@@ -168,3 +168,23 @@ def register_routes(app):
     def booking_detail(id):
         booking = Booking.query.get_or_404(id)
         return render_template('admin/booking_detail.html', booking=booking)
+    
+    @app.route('/portal/edit', methods=['GET', 'POST'])
+    @login_required
+    def edit_booking():
+        booking = Booking.query.filter_by(user_id=current_user.id).first()
+        if not booking:
+            return redirect(url_for('portal'))
+        if request.method == 'POST':
+            booking.wedding_date = request.form.get('wedding_date')
+            booking.venue = request.form.get('venue')
+            booking.party_size = int(request.form.get('party_size'))
+            booking.package = request.form.get('package')
+            booking.addons = request.form.get('addons')
+            booking.notes = request.form.get('notes')
+            current_user.name = request.form.get('name')
+            current_user.phone = request.form.get('phone')
+            db.session.commit()
+            flash('Your booking has been updated!')
+            return redirect(url_for('portal'))
+        return render_template('edit_booking.html', booking=booking)

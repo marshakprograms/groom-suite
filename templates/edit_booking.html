@@ -1,0 +1,102 @@
+
+{% extends 'base.html' %}
+{% block title %}Edit Booking — Groom Suite{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <div>
+    <h1 class="admin-title">Edit <span>Your Booking</span></h1>
+    <p class="admin-meta">Update your booking details below</p>
+  </div>
+  <a href="{{ url_for('portal') }}" class="btn-ghost">← Back to Portal</a>
+</div>
+
+<div class="inquiry-wrapper">
+  <div class="inquiry-left">
+    <p class="section-eyebrow">Your Details</p>
+    <h2 class="inquiry-title">Update Your<br><em>Experience</em></h2>
+    <div class="gold-line-left"></div>
+    <p class="inquiry-body">Need to make changes? Update your booking details here. Changes take effect immediately.</p>
+  </div>
+
+  <div class="inquiry-form">
+    <form method="POST" action="{{ url_for('edit_booking') }}">
+
+      <div class="form-row">
+        <div class="form-field">
+          <label>Your Name</label>
+          <input type="text" name="name" value="{{ current_user.name }}" required>
+        </div>
+        <div class="form-field">
+          <label>Phone Number</label>
+          <input type="text" name="phone" value="{{ current_user.phone or '' }}">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label>Wedding Date</label>
+          <input type="date" name="wedding_date" value="{{ booking.wedding_date }}" required>
+        </div>
+        <div class="form-field">
+          <label>Party Size</label>
+          <select name="party_size" id="party_size" required>
+            <option value="1" {% if booking.party_size == 1 %}selected{% endif %}>1 — Just the groom</option>
+            <option value="4" {% if booking.party_size == 4 %}selected{% endif %}>2–4 — Small party</option>
+            <option value="8" {% if booking.party_size == 8 %}selected{% endif %}>5–8 — Full squad</option>
+            <option value="12" {% if booking.party_size == 12 %}selected{% endif %}>9+ — Large party</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label>Venue / Location</label>
+        <input type="text" name="venue" value="{{ booking.venue }}" required>
+      </div>
+
+      <div class="form-field">
+        <label>Package</label>
+        <select name="package" id="package">
+          {% if booking.party_size == 1 %}
+          <option value="Groom Only" selected>Groom Only</option>
+          {% else %}
+          <option value="Group Package" {% if booking.package == 'Group Package' %}selected{% endif %}>Group Package</option>
+          <option value="Full Squad" {% if booking.package == 'Full Squad' %}selected{% endif %}>Full Squad</option>
+          {% endif %}
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label>Add-ons</label>
+        <select name="addons">
+          <option value="None" {% if booking.addons == 'None' %}selected{% endif %}>None</option>
+          <option value="Cigars" {% if booking.addons == 'Cigars' %}selected{% endif %}>Cigars</option>
+          <option value="Whiskey Service" {% if booking.addons == 'Whiskey Service' %}selected{% endif %}>Whiskey Service</option>
+          <option value="Cigars + Whiskey" {% if booking.addons == 'Cigars + Whiskey' %}selected{% endif %}>Cigars + Whiskey</option>
+        </select>
+      </div>
+
+      <div class="form-field">
+        <label>Notes</label>
+        <textarea name="notes">{{ booking.notes or '' }}</textarea>
+      </div>
+
+      <button type="submit" class="btn-gold">Save Changes</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  document.getElementById('party_size').addEventListener('change', function() {
+    const pkg = document.getElementById('package');
+    const size = this.value;
+    pkg.innerHTML = '';
+    if (size === '1') {
+      pkg.innerHTML += '<option value="Groom Only">Groom Only</option>';
+    } else {
+      pkg.innerHTML += '<option value="Group Package">Group Package</option>';
+      pkg.innerHTML += '<option value="Full Squad">Full Squad</option>';
+    }
+  });
+</script>
+{% endblock %}

@@ -76,6 +76,17 @@ body {
 .flash a { color: var(--gold); font-weight: 600; }
 .flash strong { color: var(--white); font-weight: 700; font-size: 1.05rem; }
 
+.flash-alert {
+  background: rgba(231,76,60,0.4);
+  border-left: 4px solid #e74c3c;
+  padding: 1.2rem 2rem;
+  font-size: 0.95rem;
+  color: var(--white);
+  text-align: center;
+  letter-spacing: 0.03em;
+  font-weight: 500;
+}
+
 /* BUTTONS */
 .btn-gold {
   display: inline-block;

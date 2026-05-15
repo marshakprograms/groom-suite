@@ -16,12 +16,14 @@
     <p class="portal-meta">Your Groom Suite Experience</p>
   </div>
   {% if booking %}
-  <div class="status-badge status-{{ booking.status }}">
-    <span class="status-dot"></span>
-    {{ booking.status|capitalize }}
+  <div style="display:flex;gap:1rem;align-items:center;">
+    <div class="status-badge status-{{ booking.status }}">
+      <span class="status-dot"></span>
+      {{ booking.status|capitalize }}
+    </div>
+    <a href="{{ url_for('edit_booking') }}" class="btn-outline" style="padding:0.4rem 1rem;font-size:0.6rem;">Edit Booking</a>
   </div>
   {% endif %}
-</div>
 
 <div class="portal-body">
   {% if booking %}
