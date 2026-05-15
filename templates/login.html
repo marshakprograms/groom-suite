@@ -6,7 +6,13 @@
 <div class="auth-wrapper">
   <div class="auth-card">
     <div class="auth-logo">♛</div>
+    {% if get_flashed_messages() %}
+    <h1 class="auth-title">Hello, welcome!</h1>
+    <p class="auth-sub">Please log in to track your booking and change your password</p>
+    {% else %}
     <h1 class="auth-title">Welcome Back</h1>
+    <p class="auth-sub">Sign in to your Groom Suite account</p>
+    {% endif %}
     <p class="auth-sub">Sign in to your Groom Suite account</p>
     <div class="gold-line"></div>
 

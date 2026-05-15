@@ -3,6 +3,8 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from models import db, User, Booking, PartyMember
 from functools import wraps
+import random
+import string
 
 def admin_required(f):
     @wraps(f)
@@ -55,11 +57,11 @@ def register_routes(app):
             return redirect(url_for('admin_dashboard'))
         booking = Booking.query.filter_by(user_id=current_user.id).first()
         return render_template('portal.html', booking=booking)
-    
+
     @app.route('/')
     def index():
         return render_template('index.html')
-    
+
     @app.route('/inquiry', methods=['GET', 'POST'])
     def inquiry():
         if request.method == 'POST':
@@ -75,17 +77,20 @@ def register_routes(app):
             existing_user = User.query.filter_by(email=email).first()
             if not existing_user:
                 from werkzeug.security import generate_password_hash
+                temp_password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
                 new_user = User(
                     name=name,
                     email=email,
-                    password=generate_password_hash('changeme123'),
+                    password=generate_password_hash(temp_password),
                     role='client'
                 )
                 db.session.add(new_user)
                 db.session.flush()
                 user_id = new_user.id
+                flash(f'Welcome, {name}! Your inquiry has been submitted. Log in with your email and temporary password: {temp_password}')
             else:
                 user_id = existing_user.id
+                flash(f'Welcome back, {name}! Your new inquiry has been submitted.')
 
             booking = Booking(
                 wedding_date=wedding_date,
@@ -99,7 +104,27 @@ def register_routes(app):
             )
             db.session.add(booking)
             db.session.commit()
-            flash('Inquiry submitted! We will be in touch within 24 hours.')
-            return redirect(url_for('inquiry'))
+            return redirect(url_for('login'))
 
         return render_template('inquiry.html')
+
+    @app.route('/about')
+    def about():
+        return render_template('about.html')
+
+    @app.route('/change-password', methods=['GET', 'POST'])
+    @login_required
+    def change_password():
+        if request.method == 'POST':
+            from werkzeug.security import generate_password_hash
+            new_password = request.form.get('new_password')
+            confirm = request.form.get('confirm_password')
+            if new_password != confirm:
+                flash('Passwords do not match.')
+                return redirect(url_for('change_password'))
+            current_user.password = generate_password_hash(new_password)
+            current_user.password_changed = True
+            db.session.commit()
+            flash('Password updated successfully!')
+            return redirect(url_for('portal'))
+        return render_template('change_password.html')
