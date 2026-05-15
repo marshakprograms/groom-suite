@@ -3,6 +3,8 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from models import db, User, Booking, PartyMember, Message
 from functools import wraps
+from flask_mail import Message as MailMessage
+from flask import current_app
 import random
 import string
 
@@ -14,7 +16,7 @@ def admin_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-def register_routes(app):
+def register_routes(app, mail):
 
     @app.route('/admin')
     @login_required
@@ -120,6 +122,16 @@ def register_routes(app):
                 db.session.add(new_user)
                 db.session.flush()
                 user_id = new_user.id
+                try:
+                    msg = MailMessage(
+                        subject='New Booking Inquiry — Groom Suite',
+                        sender=current_app.config['MAIL_USERNAME'],
+                        recipients=[current_app.config['BARBER_PHONE']]
+                    )
+                    msg.body = f'New inquiry from {name} for {wedding_date} at {venue}. Log in to review: http://127.0.0.1:5000/admin'
+                    mail.send(msg)
+                except Exception as e:
+                    print(f'SMS notification failed: {e}')
                 flash(f'Welcome, {name}! Your inquiry has been submitted. Log in with your email and temporary password: <strong>{temp_password}</strong>')
             else:
                 user_id = existing_user.id
