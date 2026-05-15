@@ -208,6 +208,10 @@ def register_routes(app):
                 db.session.commit()
         from models import Message
         messages = Message.query.filter_by(booking_id=booking.id).order_by(Message.timestamp).all()
+        for message in messages:
+            if message.sender_id != current_user.id:
+                message.read = True
+        db.session.commit()
         return render_template('messages.html', booking=booking, messages=messages)
 
     @app.route('/admin/booking/<int:id>/messages', methods=['GET', 'POST'])
@@ -228,6 +232,10 @@ def register_routes(app):
                 db.session.commit()
         from models import Message
         messages = Message.query.filter_by(booking_id=booking.id).order_by(Message.timestamp).all()
+        for message in messages:
+            if message.sender_id != current_user.id:
+                message.read = True
+        db.session.commit()
         return render_template('admin/messages.html', booking=booking, messages=messages)
     
     @app.context_processor
