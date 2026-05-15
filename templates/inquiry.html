@@ -59,10 +59,9 @@
       </div>
       <div class="form-field">
         <label>Package</label>
-        <select name="package" id="package">
-          <option value="">Select a package</option>
+        <select name="package" id="package" required>
+          <option value="" disabled selected>— Select a package —</option>
           <option value="Groom Only">Groom Only</option>
-          <option value="Group Package">Group Package</option>
           <option value="Full Squad">Full Squad</option>
         </select>
       </div>
@@ -95,7 +94,6 @@
     if (size === '1') {
       pkg.innerHTML += '<option value="Groom Only">Groom Only</option>';
     } else {
-      pkg.innerHTML += '<option value="Group Package">Group Package</option>';
       pkg.innerHTML += '<option value="Full Squad">Full Squad</option>';
     }
   });

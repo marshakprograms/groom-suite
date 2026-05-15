@@ -26,11 +26,15 @@ def register_routes(app, mail):
         total = len(bookings)
         pending = len([b for b in bookings if b.status == 'pending'])
         confirmed = len([b for b in bookings if b.status == 'confirmed'])
+        from collections import Counter
+        date_counts = Counter(b.wedding_date for b in bookings)
+        conflict_dates = {date for date, count in date_counts.items() if count > 1}
         return render_template('admin/dashboard.html',
             bookings=bookings,
             total=total,
             pending=pending,
-            confirmed=confirmed)
+            confirmed=confirmed,
+            conflict_dates=conflict_dates)
 
     @app.route('/admin/booking/<int:id>/confirm')
     @login_required
@@ -267,3 +271,13 @@ def register_routes(app, mail):
                     unread = 0
             return {'unread_count': unread}
         return {'unread_count': 0}
+    
+    @app.route('/admin/calendar')
+    @login_required
+    @admin_required
+    def admin_calendar():
+        bookings = Booking.query.order_by(Booking.wedding_date).all()
+        from collections import Counter
+        date_counts = Counter(b.wedding_date for b in bookings)
+        conflict_dates = {date for date, count in date_counts.items() if count > 1}
+        return render_template('admin/calendar.html', bookings=bookings, conflict_dates=conflict_dates)

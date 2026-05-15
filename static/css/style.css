@@ -761,3 +761,36 @@ body {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+
+/* CALENDAR */
+.calendar-wrapper {
+  padding: 2rem 3rem;
+}
+.calendar-events {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.08);
+}
+.calendar-event-row {
+  display: grid;
+  grid-template-columns: 200px 1fr 1fr 120px 180px;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.2rem 1.5rem;
+  background: var(--black-2);
+  transition: background 0.15s;
+}
+.calendar-event-row:hover { background: var(--black-3); }
+.cal-date-day {
+  font-size: 0.78rem;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+.conflict-row {
+  background: rgba(231,76,60,0.4) !important;
+  border-left: 3px solid #e74c3c;
+}
+.conflict-row:hover { background: rgba(231,76,60,0.5) !important; }

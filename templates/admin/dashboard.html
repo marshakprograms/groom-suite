@@ -44,7 +44,7 @@
     </thead>
     <tbody>
       {% for booking in bookings %}
-      <tr>
+      <tr class="{% if booking.wedding_date in conflict_dates %}conflict-row{% endif %}">
         <td>
           <div class="client-name">{{ booking.client.name }}</div>
           <div class="client-email">{{ booking.client.email }}</div>

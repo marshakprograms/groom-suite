@@ -60,7 +60,6 @@
           {% if booking.party_size == 1 %}
           <option value="Groom Only" selected>Groom Only</option>
           {% else %}
-          <option value="Group Package" {% if booking.package == 'Group Package' %}selected{% endif %}>Group Package</option>
           <option value="Full Squad" {% if booking.package == 'Full Squad' %}selected{% endif %}>Full Squad</option>
           {% endif %}
         </select>
@@ -94,7 +93,6 @@
     if (size === '1') {
       pkg.innerHTML += '<option value="Groom Only">Groom Only</option>';
     } else {
-      pkg.innerHTML += '<option value="Group Package">Group Package</option>';
       pkg.innerHTML += '<option value="Full Squad">Full Squad</option>';
     }
   });

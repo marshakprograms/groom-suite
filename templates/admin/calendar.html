@@ -1,0 +1,53 @@
+
+{% extends 'base.html' %}
+{% block title %}Calendar — Groom Suite{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <div>
+    <h1 class="admin-title">Booking <span>Calendar</span></h1>
+    <p class="admin-meta">All upcoming events</p>
+  </div>
+  <a href="{{ url_for('admin_dashboard') }}" class="btn-ghost">← Back to Dashboard</a>
+</div>
+
+<div class="calendar-wrapper">
+
+  <!-- Upcoming events list -->
+  <div class="calendar-events">
+    <div class="table-title" style="margin-bottom:1.5rem;">Upcoming Bookings</div>
+    {% if bookings %}
+      {% for booking in bookings %}
+      <div class="calendar-event-row {% if booking.wedding_date in conflict_dates %}conflict-row{% endif %}">
+        <div class="cal-date-block">
+          <div class="cal-date-day">{{ booking.wedding_date | format_date }}</div>
+        </div>
+        <div class="cal-event-info">
+          <div class="client-name">{{ booking.client.name }}</div>
+          <div class="client-email">{{ booking.venue }}</div>
+        </div>
+        <div class="cal-event-meta">
+          <div class="client-email">Party of {{ booking.party_size }}</div>
+          <div class="client-email">{{ booking.package or 'TBD' }}</div>
+        </div>
+        <div>
+          <span class="badge badge-{{ booking.status }}">● {{ booking.status|capitalize }}</span>
+        </div>
+        <div class="action-btns">
+          <a href="{{ url_for('booking_detail', id=booking.id) }}" class="action-btn action-view">View</a>
+          <a href="{{ url_for('admin_messages', id=booking.id) }}" class="action-btn action-view">
+            Messages
+            {% set unread = booking.messages | selectattr('read', 'equalto', False) | selectattr('sender_id', 'ne', current_user.id) | list | length %}
+            {% if unread > 0 %}<span class="unread-badge">{{ unread }}</span>{% endif %}
+          </a>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="empty-state">
+        <p>No bookings yet.</p>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
