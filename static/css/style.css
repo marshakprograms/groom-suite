@@ -544,3 +544,44 @@ body {
   color: var(--gold);
   font-weight: 400;
 }
+/* EXPERIENCE SECTION */
+.experience-section {
+  display: grid;
+  grid-template-columns: 35% 65%;
+  min-height: 400px;
+  background: var(--black);
+  border-top: 1px solid rgba(201,168,76,0.1);
+  border-bottom: 1px solid rgba(201,168,76,0.1);
+}
+.experience-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 3rem;
+  background: var(--black);
+}
+.experience-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 2.5vw, 2.5rem);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 1.2rem;
+  color: var(--white);
+}
+.experience-body {
+  font-size: 0.75rem;
+  color: var(--white-dim);
+  line-height: 1.9;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+.experience-image {
+  overflow: hidden;
+}
+.experience-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
