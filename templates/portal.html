@@ -27,10 +27,38 @@
   {% if booking %}
 
   <div class="portal-card">
-    <div class="portal-card-title">Booking Details</div>
-    <div class="detail-row">
-      <span class="detail-label">Wedding Date</span>
-      <span class="detail-value gold">{{ booking.wedding_date }}</span>
+    <div class="portal-card-title">Your Party</div>
+      {% if booking.party_members %}
+        {% for member in booking.party_members %}
+        <div class="detail-row">
+          <span class="detail-label">{{ member.name }}</span>
+          <span class="detail-value">{{ member.service }}</span>
+          <a href="{{ url_for('remove_member', id=member.id) }}" style="color:#e74c3c;font-size:0.65rem;text-decoration:none;letter-spacing:0.1em;">✕ Remove</a>
+        </div>
+        {% endfor %}
+      {% else %}
+        <p style="color:var(--white-dim);font-size:0.75rem;margin-bottom:1rem;">No party members added yet.</p>
+      {% endif %}
+
+      <form method="POST" action="{{ url_for('add_member') }}" style="margin-top:1.5rem;">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Name</label>
+            <input type="text" name="member_name" placeholder="Groomsman name" required>
+          </div>
+          <div class="form-field">
+            <label>Service</label>
+            <select name="member_service" required>
+              <option value="">Select service</option>
+              <option value="Cut + Beard + Shave">Cut + Beard + Shave</option>
+              <option value="Cut + Beard">Cut + Beard</option>
+              <option value="Cut Only">Cut Only</option>
+              <option value="Beard Only">Beard Only</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn-gold" style="width:auto;padding:0.55rem 1.5rem;">Add Member</button>
+      </form>
     </div>
     <div class="detail-row">
       <span class="detail-label">Venue</span>

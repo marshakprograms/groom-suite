@@ -57,6 +57,33 @@ def register_routes(app):
             return redirect(url_for('admin_dashboard'))
         booking = Booking.query.filter_by(user_id=current_user.id).first()
         return render_template('portal.html', booking=booking)
+    
+    @app.route('/portal/add-member', methods=['POST'])
+    @login_required
+    def add_member():
+        booking = Booking.query.filter_by(user_id=current_user.id).first()
+        if booking:
+            name = request.form.get('member_name')
+            service = request.form.get('member_service')
+            if name and service:
+                member = PartyMember(
+                    name=name,
+                    service=service,
+                    booking_id=booking.id
+                )
+                db.session.add(member)
+                db.session.commit()
+                flash('Party member added!')
+        return redirect(url_for('portal'))
+
+    @app.route('/portal/remove-member/<int:id>')
+    @login_required
+    def remove_member(id):
+        member = PartyMember.query.get_or_404(id)
+        db.session.delete(member)
+        db.session.commit()
+        flash('Party member removed.')
+        return redirect(url_for('portal'))
 
     @app.route('/')
     def index():
