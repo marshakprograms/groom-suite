@@ -15,9 +15,11 @@
       {% if current_user.is_authenticated %}
         {% if current_user.role == 'admin' %}
           <a href="{{ url_for('admin_dashboard') }}">Dashboard</a>
+          <a href="{{ url_for('admin_dashboard') }}">Messages {% if unread_count > 0 %}<span class="unread-badge">{{ unread_count }}</span>{% endif %}</a>
           <a href="#">Calendar</a>
         {% else %}
           <a href="{{ url_for('portal') }}">My Booking</a>
+          <a href="{{ url_for('portal_messages') }}">Messages {% if unread_count > 0 %}<span class="unread-badge">{{ unread_count }}</span>{% endif %}</a>
         {% endif %}
         <a href="{{ url_for('logout') }}">Sign Out</a>
       {% else %}

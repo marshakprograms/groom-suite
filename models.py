@@ -28,9 +28,21 @@ class Booking(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     party_members = db.relationship('PartyMember', backref='booking', lazy=True)
+    messages = db.relationship('Message', backref='booking_messages', lazy=True, foreign_keys='Message.booking_id')
 
 class PartyMember(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     service = db.Column(db.String(100), nullable=False)
     booking_id = db.Column(db.Integer, db.ForeignKey('booking.id'), nullable=False)
+    
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    booking_id = db.Column(db.Integer, db.ForeignKey('booking.id'), nullable=False)
+    sender_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    body = db.Column(db.Text, nullable=False)
+    timestamp = db.Column(db.DateTime, default=datetime.utcnow)
+    read = db.Column(db.Boolean, default=False)
+    
+    sender = db.relationship('User', foreign_keys=[sender_id])
+    booking = db.relationship('Booking', foreign_keys=[booking_id])

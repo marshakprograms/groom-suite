@@ -59,7 +59,13 @@
         </td>
         <td>
           <div class="action-btns">
-            <a href="{{ url_for('booking_detail', id=booking.id) }}" class="action-btn action-view">View</a>
+            <a href="{{ url_for('booking_detail', id=booking.id) }}" class="action-btn action-view">
+              View
+              {% set unread = booking.messages | selectattr('read', 'equalto', False) | selectattr('sender_id', 'ne', current_user.id) | list | length %}
+              {% if unread > 0 %}
+              <span class="unread-badge">{{ unread }}</span>
+              {% endif %}
+            </a>
             {% if booking.status == 'pending' %}
             <a href="{{ url_for('confirm_booking', id=booking.id) }}" class="action-btn action-confirm">Confirm</a>
             <a href="{{ url_for('reject_booking', id=booking.id) }}" class="action-btn action-reject">Reject</a>

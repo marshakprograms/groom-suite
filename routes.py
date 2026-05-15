@@ -1,7 +1,7 @@
 
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
-from models import db, User, Booking, PartyMember
+from models import db, User, Booking, PartyMember, Message
 from functools import wraps
 import random
 import string
@@ -188,3 +188,62 @@ def register_routes(app):
             flash('Your booking has been updated!')
             return redirect(url_for('portal'))
         return render_template('edit_booking.html', booking=booking)
+    
+    @app.route('/portal/messages', methods=['GET', 'POST'])
+    @login_required
+    def portal_messages():
+        booking = Booking.query.filter_by(user_id=current_user.id).first()
+        if not booking:
+            return redirect(url_for('portal'))
+        if request.method == 'POST':
+            body = request.form.get('body')
+            if body:
+                from models import Message
+                message = Message(
+                    booking_id=booking.id,
+                    sender_id=current_user.id,
+                    body=body
+                )
+                db.session.add(message)
+                db.session.commit()
+        from models import Message
+        messages = Message.query.filter_by(booking_id=booking.id).order_by(Message.timestamp).all()
+        return render_template('messages.html', booking=booking, messages=messages)
+
+    @app.route('/admin/booking/<int:id>/messages', methods=['GET', 'POST'])
+    @login_required
+    @admin_required
+    def admin_messages(id):
+        booking = Booking.query.get_or_404(id)
+        if request.method == 'POST':
+            body = request.form.get('body')
+            if body:
+                from models import Message
+                message = Message(
+                    booking_id=booking.id,
+                    sender_id=current_user.id,
+                    body=body
+                )
+                db.session.add(message)
+                db.session.commit()
+        from models import Message
+        messages = Message.query.filter_by(booking_id=booking.id).order_by(Message.timestamp).all()
+        return render_template('admin/messages.html', booking=booking, messages=messages)
+    
+    @app.context_processor
+    def inject_unread():
+        if current_user.is_authenticated:
+            from models import Message
+            if current_user.role == 'admin':
+                unread = Message.query.filter_by(read=False).filter(
+                    Message.sender_id != current_user.id).count()
+            else:
+                booking = Booking.query.filter_by(user_id=current_user.id).first()
+                if booking:
+                    unread = Message.query.filter_by(
+                        booking_id=booking.id, read=False).filter(
+                        Message.sender_id != current_user.id).count()
+                else:
+                    unread = 0
+            return {'unread_count': unread}
+        return {'unread_count': 0}
