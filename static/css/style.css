@@ -67,12 +67,14 @@ body {
   background: rgba(201,168,76,0.15);
   border-left: 4px solid var(--gold);
   padding: 1.2rem 2rem;
-  font-size: 0.82rem;
+  font-size: 0.95rem;
   color: var(--gold);
   text-align: center;
   letter-spacing: 0.03em;
   font-weight: 500;
 }
+.flash a { color: var(--gold); font-weight: 600; }
+.flash strong { color: var(--white); font-weight: 700; font-size: 1.05rem; }
 
 /* BUTTONS */
 .btn-gold {

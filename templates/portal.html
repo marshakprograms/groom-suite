@@ -6,7 +6,7 @@
 
 {% if not current_user.password_changed %}
 <div class="flash" style="text-align:center;">
-  For security, please <a href="{{ url_for('change_password') }}" style="color:var(--gold);font-weight:600;text-decoration:underline;">change your temporary password</a> as soon as possible.
+  For security, please <a href="{{ url_for('change_password') }}" style="color:var(--white);font-weight:600;text-decoration:underline;">change your temporary password</a> as soon as possible.
 </div>
 {% endif %}
 

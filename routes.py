@@ -120,7 +120,7 @@ def register_routes(app):
                 db.session.add(new_user)
                 db.session.flush()
                 user_id = new_user.id
-                flash(f'Welcome, {name}! Your inquiry has been submitted. Log in with your email and temporary password: {temp_password}')
+                flash(f'Welcome, {name}! Your inquiry has been submitted. Log in with your email and temporary password: <strong>{temp_password}</strong>')
             else:
                 user_id = existing_user.id
                 flash(f'Welcome back, {name}! Your new inquiry has been submitted.')
