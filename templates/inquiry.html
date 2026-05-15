@@ -34,7 +34,7 @@
       <div class="form-row">
         <div class="form-field">
           <label>Wedding Date</label>
-          <input type="date" name="wedding_date" required>
+          <input type="date" name="wedding_date" id="wedding_date" required>
         </div>
         <div class="form-field">
           <label>Party Size</label>
@@ -85,7 +85,10 @@
 </div>
 
 <script>
-  document.querySelector('[name="party_size"]').addEventListener('change', function() {
+    const today = new Date().toISOString().split('T')[0];
+    document.getElementById('wedding_date').setAttribute('min', today);
+
+    document.querySelector('[name="party_size"]').addEventListener('change', function() {
     const pkg = document.getElementById('package');
     const size = this.value;
     pkg.innerHTML = '<option value="">Select a package</option>';
