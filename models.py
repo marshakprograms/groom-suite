@@ -11,6 +11,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(200), nullable=False)
     role = db.Column(db.String(20), default='client')
+    phone = db.Column(db.String(20))
     password_changed = db.Column(db.Boolean, default=False)
     bookings = db.relationship('Booking', backref='client', lazy=True)
 

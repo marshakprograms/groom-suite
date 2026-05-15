@@ -1,0 +1,85 @@
+
+{% extends 'base.html' %}
+{% block title %}Booking Detail — Groom Suite{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <div>
+    <h1 class="admin-title">Booking <span>Detail</span></h1>
+    <p class="admin-meta">{{ booking.client.name }} · {{ booking.wedding_date | format_date }}</p>
+  </div>
+  <div style="display:flex;gap:0.75rem;">
+    {% if booking.status == 'pending' %}
+    <a href="{{ url_for('confirm_booking', id=booking.id) }}" class="btn-gold" style="width:auto;padding:0.55rem 1.5rem;">Confirm</a>
+    <a href="{{ url_for('reject_booking', id=booking.id) }}" class="btn-outline" style="padding:0.55rem 1.5rem;">Reject</a>
+    {% endif %}
+    <a href="{{ url_for('admin_dashboard') }}" class="btn-ghost">← Back</a>
+  </div>
+</div>
+
+<div class="portal-body">
+
+  <div class="portal-card">
+    <div class="portal-card-title">Groom Contact Info</div>
+    <div class="detail-row">
+      <span class="detail-label">Name</span>
+      <span class="detail-value">{{ booking.client.name }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Email</span>
+      <span class="detail-value">{{ booking.client.email }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Phone</span>
+      <span class="detail-value">{{ booking.client.phone or '—' }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Status</span>
+      <span class="badge badge-{{ booking.status }}">● {{ booking.status|capitalize }}</span>
+    </div>
+  </div>
+
+  <div class="portal-card">
+    <div class="portal-card-title">Booking Details</div>
+    <div class="detail-row">
+      <span class="detail-label">Wedding Date</span>
+      <span class="detail-value gold">{{ booking.wedding_date | format_date }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Venue</span>
+      <span class="detail-value">{{ booking.venue }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Party Size</span>
+      <span class="detail-value">{{ booking.party_size }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Package</span>
+      <span class="detail-value gold">{{ booking.package or 'TBD' }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Add-ons</span>
+      <span class="detail-value">{{ booking.addons or 'None' }}</span>
+    </div>
+    <div class="detail-row">
+      <span class="detail-label">Notes</span>
+      <span class="detail-value">{{ booking.notes or '—' }}</span>
+    </div>
+  </div>
+
+  <div class="portal-card span-2">
+    <div class="portal-card-title">Party Members</div>
+    {% if booking.party_members %}
+      {% for member in booking.party_members %}
+      <div class="detail-row">
+        <span class="detail-label">{{ member.name }}</span>
+        <span class="detail-value">{{ member.service }}</span>
+      </div>
+      {% endfor %}
+    {% else %}
+      <p style="color:var(--white-dim);font-size:0.75rem;">No party members added yet.</p>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}

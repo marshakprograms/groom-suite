@@ -37,11 +37,15 @@
           <select name="party_size" required>
             <option value="">Select size</option>
             <option value="1">1 — Just the groom</option>
-            <option value="3">2–4 — Small party</option>
-            <option value="6">5–8 — Full squad</option>
-            <option value="9">9+ — Large party</option>
+            <option value="4">2–4 — Small party</option>
+            <option value="8">5–8 — Full squad</option>
+            <option value="12">9+ — Large party</option>
           </select>
         </div>
+      </div>
+      <div class="form-field">
+        <label>Phone Number</label>
+        <input type="text" name="phone" placeholder="(919) 555-1234" required>
       </div>
       <div class="form-field">
         <label>Venue / Location</label>
@@ -49,7 +53,7 @@
       </div>
       <div class="form-field">
         <label>Package</label>
-        <select name="package">
+        <select name="package" id="package">
           <option value="">Select a package</option>
           <option value="Groom Only">Groom Only</option>
           <option value="Group Package">Group Package</option>
@@ -73,4 +77,17 @@
     </form>
   </div>
 </div>
+<script>
+  document.querySelector('[name="party_size"]').addEventListener('change', function() {
+    const pkg = document.getElementById('package');
+    const size = this.value;
+    pkg.innerHTML = '<option value="">Select a package</option>';
+    if (size === '1') {
+      pkg.innerHTML += '<option value="Groom Only">Groom Only</option>';
+    } else {
+      pkg.innerHTML += '<option value="Group Package">Group Package</option>';
+      pkg.innerHTML += '<option value="Full Squad">Full Squad</option>';
+    }
+  });
+</script
 {% endblock %}

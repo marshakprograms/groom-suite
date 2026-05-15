@@ -111,6 +111,25 @@ body {
 }
 .btn-outline:hover { background: var(--gold); color: var(--black); }
 
+.btn-ghost {
+  display: inline-block;
+  padding: 0.55rem 1.2rem;
+  background: transparent;
+  color: var(--white-dim);
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid var(--black-5);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-decoration: none;
+}
+.btn-ghost:hover { border-color: var(--gold-dim); color: var(--gold); }
+
+.span-2 { grid-column: span 2; }
+
 /* GOLD LINES */
 .gold-line {
   width: 48px;
@@ -631,3 +650,6 @@ body {
   line-height: 1.8;
   font-weight: 300;
 }
+
+.action-view { border-color: rgba(201,168,76,0.3); color: var(--gold); }
+.action-view:hover { background: rgba(201,168,76,0.08); }

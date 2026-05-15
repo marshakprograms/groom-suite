@@ -63,6 +63,10 @@ def register_routes(app):
     def add_member():
         booking = Booking.query.filter_by(user_id=current_user.id).first()
         if booking:
+            current_count = len(booking.party_members)
+            if current_count >= booking.party_size:
+                flash(f'You have reached your maximum party size of {booking.party_size} members.')
+                return redirect(url_for('portal'))
             name = request.form.get('member_name')
             service = request.form.get('member_service')
             if name and service:
@@ -94,6 +98,7 @@ def register_routes(app):
         if request.method == 'POST':
             name = request.form.get('name')
             email = request.form.get('email')
+            phone = request.form.get('phone')
             wedding_date = request.form.get('wedding_date')
             venue = request.form.get('venue')
             party_size = request.form.get('party_size')
@@ -108,6 +113,7 @@ def register_routes(app):
                 new_user = User(
                     name=name,
                     email=email,
+                    phone=phone,
                     password=generate_password_hash(temp_password),
                     role='client'
                 )
@@ -155,3 +161,10 @@ def register_routes(app):
             flash('Password updated successfully!')
             return redirect(url_for('portal'))
         return render_template('change_password.html')
+    
+    @app.route('/admin/booking/<int:id>')
+    @login_required
+    @admin_required
+    def booking_detail(id):
+        booking = Booking.query.get_or_404(id)
+        return render_template('admin/booking_detail.html', booking=booking)

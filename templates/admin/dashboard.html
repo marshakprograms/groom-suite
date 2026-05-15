@@ -59,11 +59,10 @@
         </td>
         <td>
           <div class="action-btns">
+            <a href="{{ url_for('booking_detail', id=booking.id) }}" class="action-btn action-view">View</a>
             {% if booking.status == 'pending' %}
             <a href="{{ url_for('confirm_booking', id=booking.id) }}" class="action-btn action-confirm">Confirm</a>
             <a href="{{ url_for('reject_booking', id=booking.id) }}" class="action-btn action-reject">Reject</a>
-            {% else %}
-            <span class="action-btn" style="opacity:0.4;cursor:default;">{{ booking.status|capitalize }}</span>
             {% endif %}
           </div>
         </td>
