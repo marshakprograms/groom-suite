@@ -15,9 +15,7 @@
   --font-body: 'Montserrat', sans-serif;
 }
 
-html {
-  font-size: 14px;
-}
+html { font-size: 14px; }
 
 body {
   font-family: var(--font-body);
@@ -275,7 +273,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center center;
   display: block;
 }
 
@@ -471,7 +469,7 @@ body {
 .badge-confirmed { border-color: rgba(46,204,113,0.4); color: #2ecc71; background: rgba(46,204,113,0.07); }
 .badge-pending   { border-color: rgba(201,168,76,0.4); color: var(--gold); background: rgba(201,168,76,0.07); }
 .badge-rejected  { border-color: rgba(231,76,60,0.4); color: #e74c3c; background: rgba(231,76,60,0.07); }
-.action-btns { display: flex; gap: 0.4rem; }
+.action-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 .action-btn {
   padding: 0.35rem 0.75rem;
   font-size: 0.6rem;
@@ -620,7 +618,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center;
+  object-position: center center;
   display: block;
 }
 
@@ -756,16 +754,13 @@ body {
   margin-left: 0.3rem;
   animation: blink 1s infinite;
 }
-
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
 
 /* CALENDAR */
-.calendar-wrapper {
-  padding: 2rem 3rem;
-}
+.calendar-wrapper { padding: 2rem 3rem; }
 .calendar-events {
   display: flex;
   flex-direction: column;
@@ -788,9 +783,125 @@ body {
   color: var(--gold);
   font-weight: 500;
 }
-
 .conflict-row {
   background: rgba(231,76,60,0.4) !important;
   border-left: 3px solid #e74c3c;
 }
 .conflict-row:hover { background: rgba(231,76,60,0.5) !important; }
+
+/* ══════════════════════════════════════
+   RESPONSIVE — MOBILE
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  html { font-size: 12px; }
+
+  /* NAV */
+  .navbar {
+    padding: 1rem 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  .nav-links {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .nav-links a { font-size: 0.6rem; }
+
+  /* FLASH */
+  .flash, .flash-alert {
+    padding: 0.8rem 1rem;
+    font-size: 0.8rem;
+  }
+
+  /* BUTTONS */
+  .btn-gold, .btn-outline, .btn-ghost {
+    padding: 0.6rem 1rem;
+    font-size: 0.65rem;
+  }
+
+  /* FORMS */
+  .form-row { grid-template-columns: 1fr; }
+
+  /* HOMEPAGE */
+  .hero { grid-template-columns: 1fr; }
+  .hero-image { display: block; height: 300px; }
+  .hero-content { padding: 3rem 1.5rem; }
+
+  .features-strip {
+    grid-template-columns: 1fr 1fr;
+    padding: 2rem 1.5rem;
+  }
+  .feature-item {
+    padding: 1rem;
+    border-right: none;
+    border-bottom: 1px solid rgba(201,168,76,0.12);
+  }
+
+  .services-grid { grid-template-columns: 1fr 1fr; }
+
+  .experience-section { grid-template-columns: 1fr; }
+  .experience-image {
+    height: 250px;
+  }
+  .experience-image img {
+    object-position: center center;
+  }
+
+  .inquiry-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    padding: 2rem 1.5rem;
+  }
+
+  /* PORTAL */
+  .portal-body {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+  .portal-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  .portal-card { padding: 1.5rem; }
+
+  /* MESSAGES */
+  .messages-wrapper {
+    padding: 1.5rem;
+    height: auto;
+    min-height: calc(100vh - 160px);
+  }
+  .messages-thread { min-height: 200px; }
+  .message-bubble { max-width: 85%; }
+
+  /* ADMIN */
+  .admin-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem;
+  }
+  .admin-body { padding: 1rem 1.5rem; }
+  .stats-bar { grid-template-columns: repeat(3, 1fr); }
+  .bookings-table { font-size: 0.65rem; }
+  .bookings-table th,
+  .bookings-table td { padding: 0.6rem 0.5rem; }
+
+  .calendar-wrapper { padding: 1rem 1.5rem; }
+  .calendar-event-row {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+    padding: 1rem;
+  }
+
+  /* FOOTER */
+  .footer {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+    padding: 1.5rem;
+  }
+
+}
