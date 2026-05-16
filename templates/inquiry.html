@@ -92,8 +92,10 @@
     const size = this.value;
     pkg.innerHTML = '<option value="">Select a package</option>';
     if (size === '1') {
+      pkg.innerHTML = '<option value="" disabled selected>— Select a package —</option>';
       pkg.innerHTML += '<option value="Groom Only">Groom Only</option>';
     } else {
+      pkg.innerHTML = '<option value="" disabled selected>— Select a package —</option>';
       pkg.innerHTML += '<option value="Full Squad">Full Squad</option>';
     }
   });
