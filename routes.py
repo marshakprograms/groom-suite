@@ -76,8 +76,10 @@ def register_routes(app, mail):
             name = request.form.get('member_name')
             service = request.form.get('member_service')
             if name and service:
+                role = request.form.get('member_role', 'Groomsman')
                 member = PartyMember(
                     name=name,
+                    role=role,
                     service=service,
                     booking_id=booking.id
                 )
@@ -108,7 +110,15 @@ def register_routes(app, mail):
             wedding_date = request.form.get('wedding_date')
             venue = request.form.get('venue')
             party_size = request.form.get('party_size')
-            package = request.form.get('package')
+            party_size_int = int(request.form.get('party_size'))
+            if party_size_int == 1:
+                package = 'Groom Only'
+            elif party_size_int <= 4:
+                package = 'Small Group Package'
+            elif party_size_int <= 8:
+                package = 'Full Squad Package'
+            else:
+                package = 'Large Party Package'
             addons = request.form.get('addons')
             notes = request.form.get('notes')
 
@@ -144,7 +154,7 @@ def register_routes(app, mail):
             booking = Booking(
                 wedding_date=wedding_date,
                 venue=venue,
-                party_size=int(party_size),
+                party_size=party_size_int,
                 package=package,
                 addons=addons,
                 notes=notes,
@@ -281,3 +291,31 @@ def register_routes(app, mail):
         date_counts = Counter(b.wedding_date for b in bookings)
         conflict_dates = {date for date, count in date_counts.items() if count > 1}
         return render_template('admin/calendar.html', bookings=bookings, conflict_dates=conflict_dates)
+    
+    @app.route('/forgot-password', methods=['GET', 'POST'])
+    def forgot_password():
+        if request.method == 'POST':
+            email = request.form.get('email')
+            user = User.query.filter_by(email=email).first()
+            if user:
+                from werkzeug.security import generate_password_hash
+                temp_password = ''.join(random.choices(string.ascii_letters + string.digits, k=8))
+                user.password = generate_password_hash(temp_password)
+                user.password_changed = False
+                db.session.commit()
+                try:
+                    msg = MailMessage(
+                        subject='Groom Suite — Password Reset',
+                        sender=current_app.config['MAIL_USERNAME'],
+                        recipients=[email]
+                    )
+                    msg.body = f'Your temporary password is: {temp_password}\n\nLog in and change it immediately.'
+                    mail.send(msg)
+                    flash('A temporary password has been sent to your email.')
+                except Exception as e:
+                    print(f'Email failed: {e}')
+                    flash(f'Your temporary password is: <strong>{temp_password}</strong> — please save this now.')
+            else:
+                flash('No account found with that email address.')
+            return redirect(url_for('login'))
+        return render_template('forgot_password.html')

@@ -41,7 +41,14 @@
     </div>
     <div class="detail-row">
       <span class="detail-label">Party Size</span>
-      <span class="detail-value">{{ booking.party_size }}</span>
+      <span class="detail-value">
+        {% if booking.party_size == 1 %}Just the Groom
+        {% elif booking.party_size == 4 %}Up to 4
+        {% elif booking.party_size == 8 %}Up to 8
+        {% elif booking.party_size == 12 %}Up to 12
+        {% else %}{{ booking.party_size }}
+        {% endif %}
+      </span>
     </div>
     <div class="detail-row">
       <span class="detail-label">Package</span>
@@ -63,7 +70,7 @@
     {% if booking.party_members %}
       {% for member in booking.party_members %}
       <div class="detail-row">
-        <span class="detail-label">{{ member.name }}</span>
+        <span class="detail-label">{{ member.name }} <span style="color:var(--gold-dim);font-size:0.6rem;">{{ member.role }}</span></span>
         <span class="detail-value">{{ member.service }}</span>
         <a href="{{ url_for('remove_member', id=member.id) }}" style="color:#e74c3c;font-size:0.65rem;text-decoration:none;letter-spacing:0.1em;">✕ Remove</a>
       </div>
@@ -78,18 +85,36 @@
           <input type="text" name="member_name" placeholder="Groomsman name" required>
         </div>
         <div class="form-field">
-          <label>Service</label>
-          <select name="member_service" required>
-            <option value="">Select service</option>
-            <option value="Cut + Beard + Shave">Cut + Beard + Shave</option>
-            <option value="Cut + Beard">Cut + Beard</option>
-            <option value="Cut Only">Cut Only</option>
-            <option value="Beard Only">Beard Only</option>
+          <label>Role</label>
+          <select name="member_role" required>
+            <option value="" disabled selected>— Select role —</option>
+            <option value="Groom">Groom</option>
+            <option value="Best Man">Best Man</option>
+            <option value="Groomsman">Groomsman</option>
+            <option value="Father of Groom">Father of Groom</option>
+            <option value="Father of Bride">Father of Bride</option>
+            <option value="Ring Bearer">Ring Bearer</option>
+            <option value="VIP Guest">VIP Guest</option>
           </select>
         </div>
       </div>
+      <div class="form-field">
+        <label>Service</label>
+        <select name="member_service" required>
+          <option value="" disabled selected>— Select service —</option>
+          <option value="Cut + Beard + Shave">Cut + Beard + Shave</option>
+          <option value="Cut + Beard">Cut + Beard</option>
+          <option value="Cut Only">Cut Only</option>
+          <option value="Beard Only">Beard Only</option>
+        </select>
+      </div>
       <button type="submit" class="btn-gold" style="width:auto;padding:0.55rem 1.5rem;">Add Member</button>
     </form>
+    {% if booking.party_members %}
+    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(201,168,76,0.1);">
+      <a href="{{ url_for('portal') }}" class="btn-gold" style="width:auto;padding:0.55rem 1.5rem;">✓ Save</a>
+    </div>
+    {% endif %}
   </div>
   {% endif %}
 

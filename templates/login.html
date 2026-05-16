@@ -13,8 +13,6 @@
     <h1 class="auth-title">Welcome Back</h1>
     <p class="auth-sub">Sign in to your Groom Suite account</p>
     {% endif %}
-    <p class="auth-sub">Sign in to your Groom Suite account</p>
-    <div class="gold-line"></div>
 
     <form method="POST" action="{{ url_for('login') }}">
       <div class="form-field">
@@ -29,7 +27,12 @@
     </form>
 
     <p class="auth-footer">
+      <a href="{{ url_for('forgot_password') }}">Forgot Password?</a>
+      &nbsp;·&nbsp;
       <a href="{{ url_for('index') }}">← Back to Home</a>
+    </p>
+    <p class="auth-footer" style="margin-top:0.75rem;">
+      Don't have an account yet? <a href="{{ url_for('inquiry') }}">Book Now</a>
     </p>
   </div>
 </div>

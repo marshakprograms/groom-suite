@@ -19,16 +19,16 @@
     <form method="POST" action="{{ url_for('inquiry') }}">
       <div class="form-field">
         <label>Your Name</label>
-        <input type="text" name="name" placeholder="The Groom" required>
+        <input type="text" name="name" placeholder="Full Name" required>
       </div>
       <div class="form-row">
         <div class="form-field">
           <label>Email</label>
-          <input type="email" name="email" id="email" placeholder="groom@email.com" required>
+          <input type="email" name="email" id="email" placeholder="email" required>
         </div>
         <div class="form-field">
           <label>Confirm Email</label>
-          <input type="email" name="confirm_email" id="confirm_email" placeholder="groom@email.com" required>
+          <input type="email" name="confirm_email" id="confirm_email" placeholder="email" required>
         </div>
       </div>
       <div class="form-row">
@@ -58,14 +58,6 @@
         </div>
       </div>
       <div class="form-field">
-        <label>Package</label>
-        <select name="package" id="package" required>
-          <option value="" disabled selected>— Select a package —</option>
-          <option value="Groom Only">Groom Only</option>
-          <option value="Full Squad">Full Squad</option>
-        </select>
-      </div>
-      <div class="form-field">
         <label>Add-ons</label>
         <select name="addons">
           <option value="None">None</option>
@@ -86,19 +78,6 @@
 <script>
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('wedding_date').setAttribute('min', today);
-
-    document.querySelector('[name="party_size"]').addEventListener('change', function() {
-    const pkg = document.getElementById('package');
-    const size = this.value;
-    pkg.innerHTML = '<option value="">Select a package</option>';
-    if (size === '1') {
-      pkg.innerHTML = '<option value="" disabled selected>— Select a package —</option>';
-      pkg.innerHTML += '<option value="Groom Only">Groom Only</option>';
-    } else {
-      pkg.innerHTML = '<option value="" disabled selected>— Select a package —</option>';
-      pkg.innerHTML += '<option value="Full Squad">Full Squad</option>';
-    }
-  });
 
   document.querySelector('form').addEventListener('submit', function(e) {
     const email = document.getElementById('email').value;
