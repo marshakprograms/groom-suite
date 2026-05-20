@@ -73,11 +73,12 @@
 
   {% if booking.party_size > 1 %}
   <div class="portal-card">
-    <div class="portal-card-title">Your Party</div>
+  <div class="portal-card-title">Your Party</div>
+      <p class="party-instruction">Add one party member at a time using the form below.<br>When all members have been added, click SAVE.</p>    
     {% if booking.party_members %}
       {% for member in booking.party_members %}
       <div class="detail-row">
-        <span class="detail-label">{{ member.name }} <span style="color:var(--gold-dim);font-size:0.6rem;">{{ member.role }}</span></span>
+        <span class="detail-label">{{ member.name }} <span style="color:var(--gold-dim);font-size:0.8rem;">{{ member.role }}</span></span>
         <span class="detail-value">{{ member.service }}</span>
         <a href="{{ url_for('remove_member', id=member.id) }}" style="color:#e74c3c;font-size:0.65rem;text-decoration:none;letter-spacing:0.1em;">✕ Remove</a>
       </div>

@@ -109,7 +109,6 @@ def register_routes(app, mail):
             phone = request.form.get('phone')
             wedding_date = request.form.get('wedding_date')
             venue = request.form.get('venue')
-            party_size = request.form.get('party_size')
             party_size_int = int(request.form.get('party_size'))
             if party_size_int == 1:
                 package = 'Groom Only'

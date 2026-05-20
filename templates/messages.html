@@ -1,11 +1,11 @@
 
 {% extends 'base.html' %}
-{% block title %}Messages — Groom Suite{% endblock %}
+{% block title %}Messages — Ronald's Groom Suite{% endblock %}
 
 {% block content %}
 <div class="admin-header">
   <div>
-    <h1 class="admin-title">Messages <span>with Groom Suite</span></h1>
+    <h1 class="admin-title">Messages <span>with Ronald's Groom Suite</span></h1>
     <p class="admin-meta">{{ current_user.name }} · {{ booking.wedding_date | format_date }}</p>
   </div>
   <a href="{{ url_for('portal') }}" class="btn-ghost">← Back to Portal</a>
@@ -25,7 +25,7 @@
       {% endfor %}
     {% else %}
       <div class="empty-state">
-        <p>No messages yet. Send a message to Groom Suite below.</p>
+        <p>No messages yet. Send a message to Ronald's Groom Suite below.</p>
       </div>
     {% endif %}
   </div>

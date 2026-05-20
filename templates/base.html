@@ -4,13 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Groom Suite{% endblock %}</title>
+  <title>{% block title %}Ronald's Groom Suite{% endblock %}</title>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}?v={{ range(1, 99999) | random }}">
 </head>
 <body>
   <nav class="navbar">
-    <div class="nav-logo">Groom Suite <span>Mobile Grooming</span></div>
+    <div class="nav-logo">Ronald's Groom Suite <span>Mobile Grooming</span></div>
     <div class="nav-links">
       {% if current_user.is_authenticated %}
         {% if current_user.role == 'admin' %}

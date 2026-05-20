@@ -8,7 +8,7 @@ with app.app_context():
 
     # Admin user (barber)
     admin = User(
-        name='Groom Suite Admin',
+        name="Ronald's Groom Suite Admin",
         email='admin@groomsuite.com',
         password=generate_password_hash('admin123'),
         role='admin'

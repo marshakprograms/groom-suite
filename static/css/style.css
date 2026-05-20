@@ -38,7 +38,7 @@ body {
 }
 .nav-logo {
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   font-weight: 600;
   color: var(--gold);
   letter-spacing: 0.2em;
@@ -46,13 +46,13 @@ body {
 }
 .nav-logo span {
   display: block;
-  font-size: 0.55rem;
+  font-size: 0.7rem;
   letter-spacing: 0.35em;
   color: var(--white-dim);
 }
 .nav-links { display: flex; gap: 2rem; }
 .nav-links a {
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--white-dim);
@@ -240,7 +240,7 @@ body {
   display: block;
 }
 .hero-eyebrow {
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--gold);
@@ -255,7 +255,7 @@ body {
 }
 .hero-title em { font-style: italic; color: var(--gold); }
 .hero-body {
-  font-size: 0.82rem;
+  font-size: 1rem;
   line-height: 1.9;
   color: var(--white-dim);
   margin-bottom: 2.5rem;
@@ -295,19 +295,19 @@ body {
 .feature-item:last-child { border-right: none; padding-right: 0; }
 .feature-icon { font-size: 1.4rem; color: var(--gold); margin-bottom: 0.6rem; }
 .feature-label {
-  font-size: 0.6rem;
+  font-size: 0.85rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--gold);
   margin-bottom: 0.4rem;
   font-weight: 600;
 }
-.feature-desc { font-size: 0.7rem; color: var(--white-dim); line-height: 1.6; font-weight: 300; }
+.feature-desc { font-size: 0.85rem; color: var(--white-dim); line-height: 1.6; font-weight: 300; }
 
 /* SERVICES */
 .services-section { padding: 6rem 3rem; text-align: center; }
 .section-eyebrow {
-  font-size: 0.6rem;
+  font-size: 1rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--gold);
@@ -338,11 +338,11 @@ body {
 .service-icon { font-size: 2rem; color: var(--gold); margin-bottom: 1rem; }
 .service-name {
   font-family: var(--font-display);
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   color: var(--gold);
   margin-bottom: 0.5rem;
 }
-.service-desc { font-size: 0.7rem; color: var(--white-dim); line-height: 1.7; font-weight: 300; }
+.service-desc { font-size: 0.85rem; color: var(--white-dim); line-height: 1.7; font-weight: 300; }
 .service-price {
   margin-top: 1rem;
   font-size: 0.65rem;
@@ -366,7 +366,7 @@ body {
   margin-bottom: 0.5rem;
 }
 .cta-title em { font-style: italic; color: var(--gold); }
-.cta-body { font-size: 0.78rem; color: var(--white-dim); margin-bottom: 2rem; font-weight: 300; }
+.cta-body { font-size: 0.9rem; color: var(--white-dim); margin-bottom: 2rem; font-weight: 300; }
 
 /* FOOTER */
 .footer {
@@ -379,12 +379,12 @@ body {
 }
 .footer-logo {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.4rem;
   color: var(--gold);
   letter-spacing: 0.2em;
 }
-.footer-tagline { font-size: 0.62rem; color: var(--white-dim); letter-spacing: 0.1em; margin-top: 0.2rem; }
-.footer-copy { font-size: 0.6rem; color: var(--black-5); }
+.footer-tagline { font-size: 0.9rem; color: var(--white-dim); letter-spacing: 0.1em; margin-top: 0.2rem; }
+.footer-copy { font-size: 0.75rem; color: var(--white-dim); }
 
 /* ADMIN */
 .admin-header {
@@ -556,7 +556,7 @@ body {
   align-items: center;
   padding: 0.7rem 0;
   border-bottom: 1px solid rgba(201,168,76,0.07);
-  font-size: 0.75rem;
+  font-size: 0.9rem;
 }
 .detail-row:last-child { border-bottom: none; }
 .detail-label { color: var(--white-dim); font-weight: 300; }
@@ -614,7 +614,7 @@ body {
   color: var(--white);
 }
 .experience-body {
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   color: var(--white-dim);
   line-height: 1.9;
   font-weight: 300;
@@ -850,7 +850,7 @@ body {
 
   .experience-section { grid-template-columns: 1fr; }
   .experience-image {
-    height: 250px;
+    height: 165px;
   }
   .experience-image img {
     object-position: center center;
@@ -911,5 +911,15 @@ body {
     text-align: center;
     padding: 1.5rem;
   }
+
+  /* PARTY INSTRUCTION */
+  .party-instruction {
+    color: var(--white-dim) !important;
+    font-size: 16px !important;
+    margin-bottom: 1rem !important;
+    font-style: italic !important;
+    line-height: 1.6 !important;
+  }
+
 
 }

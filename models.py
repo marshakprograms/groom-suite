@@ -29,7 +29,6 @@ class Booking(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     party_members = db.relationship('PartyMember', backref='booking', lazy=True)
     messages = db.relationship('Message', backref='booking_messages', lazy=True, foreign_keys='Message.booking_id')
-
 class PartyMember(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
