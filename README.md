@@ -2,7 +2,7 @@
 
 **A full-stack Flask booking and client portal application for a mobile luxury wedding grooming service.**
 
-Built for Ronald's Unisex Barbershop (Durham, NC) — a mobile barber who brings a fully equipped Sprinter van to wedding venues across the Triangle area.
+Built for Ronald's Unisex Barbershop (Durham, NC) — a mobile barber who brings a fully equipped van to wedding venues across the Triangle area.
 
 ---
 
