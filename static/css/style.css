@@ -478,6 +478,8 @@ a.feature-item:hover {
 .badge-confirmed { border-color: rgba(46,204,113,0.4); color: #2ecc71; background: rgba(46,204,113,0.07); }
 .badge-pending   { border-color: rgba(201,168,76,0.4); color: var(--gold); background: rgba(201,168,76,0.07); }
 .badge-rejected  { border-color: rgba(231,76,60,0.4); color: #e74c3c; background: rgba(231,76,60,0.07); }
+.badge-cancelled { border-color: rgba(150,150,150,0.4); color: #999; background: rgba(150,150,150,0.07); }
+.status-cancelled { border-color: rgba(150,150,150,0.4); color: #999; background: rgba(150,150,150,0.08); }
 .action-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 .action-btn {
   padding: 0.35rem 0.75rem;

@@ -334,3 +334,33 @@ def register_routes(app, mail):
     @app.route('/groom-squad-ready')
     def groom_squad_ready():
         return render_template('features/groom_squad_ready.html')
+    
+    @app.route('/admin/booking/<int:id>/cancel')
+    @login_required
+    @admin_required
+    def admin_cancel_booking(id):
+        booking = Booking.query.get_or_404(id)
+        booking.status = 'cancelled'
+        db.session.commit()
+        flash('Booking has been cancelled.')
+        return redirect(url_for('admin_dashboard'))
+
+    @app.route('/portal/cancel', methods=['POST'])
+    @login_required
+    def cancel_booking():
+        booking = Booking.query.filter_by(user_id=current_user.id).first()
+        if booking and booking.status != 'cancelled':
+            booking.status = 'cancelled'
+            db.session.commit()
+            try:
+                msg = MailMessage(
+                    subject='Booking Cancelled — Ronald\'s Groom Suite',
+                    sender=current_app.config['MAIL_USERNAME'],
+                    recipients=[current_app.config['BARBER_PHONE']]
+                )
+                msg.body = f'Booking cancelled by {current_user.name} for {booking.wedding_date} at {booking.venue}.'
+                mail.send(msg)
+            except Exception as e:
+                print(f'Cancel notification failed: {e}')
+            flash('Your booking has been cancelled. Please contact us to reschedule.')
+        return redirect(url_for('portal'))
