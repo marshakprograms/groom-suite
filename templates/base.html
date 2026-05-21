@@ -10,7 +10,9 @@
 </head>
 <body>
   <nav class="navbar">
-    <div class="nav-logo">Ronald's Groom Suite <span>Mobile Grooming</span></div>
+    <div class="nav-logo">
+      <img src="{{ url_for('static', filename='images/hero_logo.png') }}" alt="Lux Head Space" style="height: 60px; width: auto;">
+    </div>
     <div class="nav-links">
       {% if current_user.is_authenticated %}
         {% if current_user.role == 'admin' %}
