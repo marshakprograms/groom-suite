@@ -108,6 +108,7 @@ def register_routes(app, mail):
             email = request.form.get('email')
             phone = request.form.get('phone')
             wedding_date = request.form.get('wedding_date')
+            start_time = request.form.get('start_time')
             venue = request.form.get('venue')
             party_size_int = int(request.form.get('party_size'))
             if party_size_int == 1:
@@ -153,6 +154,7 @@ def register_routes(app, mail):
             booking = Booking(
                 wedding_date=wedding_date,
                 venue=venue,
+                start_time=start_time,
                 party_size=party_size_int,
                 package=package,
                 addons=addons,
@@ -204,6 +206,7 @@ def register_routes(app, mail):
             old_date = booking.wedding_date
             new_date = request.form.get('wedding_date')
             booking.wedding_date = new_date
+            booking.start_time = request.form.get('start_time')
             booking.venue = request.form.get('venue')
             booking.party_size = int(request.form.get('party_size'))
             booking.package = request.form.get('package')
