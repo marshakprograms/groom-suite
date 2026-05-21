@@ -107,9 +107,9 @@
         <label>Add-ons</label>
         <select name="addons">
           <option value="None" {% if booking.addons == 'None' %}selected{% endif %}>None</option>
-          <option value="Cigars" {% if booking.addons == 'Cigars' %}selected{% endif %}>Cigars</option>
-          <option value="Whiskey Service" {% if booking.addons == 'Whiskey Service' %}selected{% endif %}>Whiskey Service</option>
-          <option value="Cigars + Whiskey" {% if booking.addons == 'Cigars + Whiskey' %}selected{% endif %}>Cigars + Whiskey</option>
+          <option value="Cigars ($150)" {% if booking.addons == 'Cigars ($150)' %}selected{% endif %}>Cigars ($150)</option>
+          <option value="Whiskey Service ($125)" {% if booking.addons == 'Whiskey Service ($125)' %}selected{% endif %}>Whiskey Service ($125)</option>
+          <option value="Cigars + Whiskey ($250)" {% if booking.addons == 'Cigars + Whiskey ($250)' %}selected{% endif %}>Cigars + Whiskey ($250)</option>
         </select>
       </div>
 
