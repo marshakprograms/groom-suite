@@ -77,7 +77,7 @@ def register_routes(app, mail):
             current_count = len(booking.party_members)
             if current_count >= booking.party_size:
                 flash(
-                    f"ALERT: You have reached your maximum party size of {booking.party_size} members. To add more, please edit your booking to increase your party size."
+                    f"ALERT: You have reached your maximum party size of {booking.party_size} members.  To add more, please edit your booking to increase your party size."
                 )
                 return redirect(url_for("portal"))
             name = request.form.get("member_name")
