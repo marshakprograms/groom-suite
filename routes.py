@@ -318,3 +318,19 @@ def register_routes(app, mail):
                 flash('No account found with that email address.')
             return redirect(url_for('login'))
         return render_template('forgot_password.html')
+    
+    @app.route('/we-come-to-you')
+    def we_come_to_you():
+        return render_template('features/we_come_to_you.html')
+
+    @app.route('/premium-experience')
+    def premium_experience():
+        return render_template('features/premium_experience.html')
+
+    @app.route('/professional-results')
+    def professional_results():
+        return render_template('features/professional_results.html')
+
+    @app.route('/groom-squad-ready')
+    def groom_squad_ready():
+        return render_template('features/groom_squad_ready.html')

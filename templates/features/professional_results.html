@@ -1,0 +1,56 @@
+
+{% extends 'base.html' %}
+{% block title %}Professional Results — Ronald's Groom Suite{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <div>
+    <h1 class="admin-title">Professional <span>Results</span></h1>
+    <p class="admin-meta">Sharp, clean, and photo-ready from start to finish</p>
+  </div>
+  <a href="{{ url_for('index') }}" class="btn-ghost">← Back to Home</a>
+</div>
+
+<div class="feature-page-wrapper">
+  <div class="feature-page-content">
+    <p class="section-eyebrow">The Ronald's Standard</p>
+    <h2 class="feature-page-title">Photo-Ready <em>Every Time</em></h2>
+    <div class="gold-line-left"></div>
+    <p class="feature-page-body">Ronald brings decades of barbering experience to every wedding he services. Every cut is executed with precision, every edge is clean, and every client leaves looking their absolute best.</p>
+    <p class="feature-page-body">Wedding photos last forever — Ronald makes sure you look the part.</p>
+
+    <div class="feature-highlights">
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◉</div>
+        <div>
+          <div class="feature-highlight-title">Licensed & Experienced</div>
+          <div class="feature-highlight-desc">Ronald is a fully licensed barber with years of experience servicing weddings, special events, and VIP clients.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◉</div>
+        <div>
+          <div class="feature-highlight-title">Precision Cuts</div>
+          <div class="feature-highlight-desc">From classic fades to beard sculpting and straight razor shaves — every service is delivered with professional precision.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◉</div>
+        <div>
+          <div class="feature-highlight-title">Sanitized Equipment</div>
+          <div class="feature-highlight-desc">All tools are professionally sanitized before every appointment. Your health and safety are always the priority.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◉</div>
+        <div>
+          <div class="feature-highlight-title">Consistent Quality</div>
+          <div class="feature-highlight-desc">Every member of your party receives the same high level of attention and care — from the groom to the ring bearer.</div>
+        </div>
+      </div>
+    </div>
+
+    <a href="{{ url_for('inquiry') }}" class="btn-gold" style="margin-top:2rem;">Book Your Experience</a>
+  </div>
+</div>
+{% endblock %}

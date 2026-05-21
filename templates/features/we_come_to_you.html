@@ -1,0 +1,56 @@
+
+{% extends 'base.html' %}
+{% block title %}We Come to You — Ronald's Groom Suite{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <div>
+    <h1 class="admin-title">We Come <span>To You</span></h1>
+    <p class="admin-meta">On-site grooming for weddings & special events</p>
+  </div>
+  <a href="{{ url_for('index') }}" class="btn-ghost">← Back to Home</a>
+</div>
+
+<div class="feature-page-wrapper">
+  <div class="feature-page-content">
+    <p class="section-eyebrow">Our Mobile Service</p>
+    <h2 class="feature-page-title">The Barbershop <em>Comes to You</em></h2>
+    <div class="gold-line-left"></div>
+    <p class="feature-page-body">No need to leave your venue or hotel. Ronald's Groom Suite brings a fully equipped barbershop experience directly to your location — whether that's a hotel suite, private residence, or wedding venue.</p>
+    <p class="feature-page-body">We arrive fully equipped with everything needed to deliver a premium grooming experience in a mobile barbershop on wheels. All you need to provide is the address.</p>
+
+    <div class="feature-highlights">
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">✦</div>
+        <div>
+          <div class="feature-highlight-title">Service Area</div>
+          <div class="feature-highlight-desc">Durham, Raleigh, Chapel Hill, Cary and surrounding areas in the Triangle region of North Carolina.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">✦</div>
+        <div>
+          <div class="feature-highlight-title">What We Bring</div>
+          <div class="feature-highlight-desc">Professional clippers, scissors, capes, hot towels, sanitizing supplies, and all grooming products needed.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">✦</div>
+        <div>
+          <div class="feature-highlight-title">Booking in Advance</div>
+          <div class="feature-highlight-desc">We recommend booking 4–6 weeks in advance for peak wedding season (May–October) to ensure availability.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">✦</div>
+        <div>
+          <div class="feature-highlight-title">Setup Time</div>
+          <div class="feature-highlight-desc">We arrive 30 minutes before your scheduled start time to set up and be ready when you are.</div>
+        </div>
+      </div>
+    </div>
+
+    <a href="{{ url_for('inquiry') }}" class="btn-gold" style="margin-top:2rem;">Book Your Experience</a>
+  </div>
+</div>
+{% endblock %}

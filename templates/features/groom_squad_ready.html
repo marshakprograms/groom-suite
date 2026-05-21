@@ -1,0 +1,56 @@
+
+{% extends 'base.html' %}
+{% block title %}Groom Squad Ready — Ronald's Groom Suite{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <div>
+    <h1 class="admin-title">Groom Squad <span>Ready</span></h1>
+    <p class="admin-meta">We handle your whole crew so everyone looks their best</p>
+  </div>
+  <a href="{{ url_for('index') }}" class="btn-ghost">← Back to Home</a>
+</div>
+
+<div class="feature-page-wrapper">
+  <div class="feature-page-content">
+    <p class="section-eyebrow">Group Packages</p>
+    <h2 class="feature-page-title">The Whole Crew <em>Taken Care Of</em></h2>
+    <div class="gold-line-left"></div>
+    <p class="feature-page-body">Ronald's Groom Suite is built for the full wedding party experience. From the groom to the groomsmen, best man, father of the groom, and VIP guests — everyone gets the royal treatment.</p>
+    <p class="feature-page-body">One booking. One barber. Everyone looking sharp.</p>
+
+    <div class="feature-highlights">
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">❖</div>
+        <div>
+          <div class="feature-highlight-title">Groom Only</div>
+          <div class="feature-highlight-desc">Just the groom? No problem. A dedicated session focused entirely on making the groom look and feel his best.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">❖</div>
+        <div>
+          <div class="feature-highlight-title">Small Group — Up to 4</div>
+          <div class="feature-highlight-desc">Perfect for intimate wedding parties. Each member receives a personalized service tailored to their style.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">❖</div>
+        <div>
+          <div class="feature-highlight-title">Full Squad — Up to 8</div>
+          <div class="feature-highlight-desc">The full experience for the full crew. Special group pricing available for parties of 5 or more.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">❖</div>
+        <div>
+          <div class="feature-highlight-title">Large Party — 9+</div>
+          <div class="feature-highlight-desc">Have a large wedding party? Contact us directly to discuss scheduling and custom pricing for your group.</div>
+        </div>
+      </div>
+    </div>
+
+    <a href="{{ url_for('inquiry') }}" class="btn-gold" style="margin-top:2rem;">Book Your Experience</a>
+  </div>
+</div>
+{% endblock %}

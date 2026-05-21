@@ -1,0 +1,56 @@
+
+{% extends 'base.html' %}
+{% block title %}Premium Experience — Ronald's Groom Suite{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <div>
+    <h1 class="admin-title">Premium <span>Experience</span></h1>
+    <p class="admin-meta">Top-tier service with whiskey, cigars & relaxation</p>
+  </div>
+  <a href="{{ url_for('index') }}" class="btn-ghost">← Back to Home</a>
+</div>
+
+<div class="feature-page-wrapper">
+  <div class="feature-page-content">
+    <p class="section-eyebrow">More Than a Haircut</p>
+    <h2 class="feature-page-title">A Luxury <em>Experience</em></h2>
+    <div class="gold-line-left"></div>
+    <p class="feature-page-body">Your wedding day is one of the most important days of your life. Ronald's Groom Suite makes sure the preparation matches the occasion — with a premium grooming experience that feels as special as the day itself.</p>
+    <p class="feature-page-body">Sit back, relax, and enjoy the moment while Ronald takes care of the rest.</p>
+
+    <div class="feature-highlights">
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◈</div>
+        <div>
+          <div class="feature-highlight-title">Premium Cigars</div>
+          <div class="feature-highlight-desc">Add a cigar service to your booking and celebrate the day with your crew in style.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◈</div>
+        <div>
+          <div class="feature-highlight-title">Whiskey Service</div>
+          <div class="feature-highlight-desc">Toast to the big day with a premium whiskey service — the perfect way to start a memorable day.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◈</div>
+        <div>
+          <div class="feature-highlight-title">Relaxed Atmosphere</div>
+          <div class="feature-highlight-desc">No rushing to a barbershop. No waiting. Just you, your crew, and a world-class grooming experience in the comfort of Ronald's mobile barbershop.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◈</div>
+        <div>
+          <div class="feature-highlight-title">Photo Ready</div>
+          <div class="feature-highlight-desc">Every cut and style is delivered with your wedding photos in mind — sharp, clean, and perfectly finished.</div>
+        </div>
+      </div>
+    </div>
+
+    <a href="{{ url_for('inquiry') }}" class="btn-gold" style="margin-top:2rem;">Book Your Experience</a>
+  </div>
+</div>
+{% endblock %}
