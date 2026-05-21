@@ -228,7 +228,7 @@ def register_routes(app, mail):
                 booking.status = "pending"
                 try:
                     msg = MailMessage(
-                        subject="New Date Request — Ronald's Groom Suite",
+                        subject="New Date Request — Lux Head Space Mobile Barber Concierge",
                         sender=current_app.config["MAIL_USERNAME"],
                         recipients=[current_app.config["BARBER_PHONE"]],
                     )
@@ -409,7 +409,7 @@ def register_routes(app, mail):
             db.session.commit()
             try:
                 msg = MailMessage(
-                    subject="Booking Cancelled — Ronald's Groom Suite",
+                    subject="Booking Cancelled — Lux Head Space Mobile Barber Concierge",
                     sender=current_app.config["MAIL_USERNAME"],
                     recipients=[current_app.config["BARBER_PHONE"]],
                 )
