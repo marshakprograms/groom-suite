@@ -201,7 +201,9 @@ def register_routes(app, mail):
         if not booking:
             return redirect(url_for('portal'))
         if request.method == 'POST':
-            booking.wedding_date = request.form.get('wedding_date')
+            old_date = booking.wedding_date
+            new_date = request.form.get('wedding_date')
+            booking.wedding_date = new_date
             booking.venue = request.form.get('venue')
             booking.party_size = int(request.form.get('party_size'))
             booking.package = request.form.get('package')
@@ -209,8 +211,22 @@ def register_routes(app, mail):
             booking.notes = request.form.get('notes')
             current_user.name = request.form.get('name')
             current_user.phone = request.form.get('phone')
+            if booking.status == 'rejected' and new_date != old_date:
+                booking.status = 'pending'
+                try:
+                    msg = MailMessage(
+                        subject='New Date Request — Ronald\'s Groom Suite',
+                        sender=current_app.config['MAIL_USERNAME'],
+                        recipients=[current_app.config['BARBER_PHONE']]
+                    )
+                    msg.body = f'{current_user.name} has submitted a new date request for {new_date} at {booking.venue}. Log in to review: http://127.0.0.1:5000/admin'
+                    mail.send(msg)
+                except Exception as e:
+                    print(f'Notification failed: {e}')
+                flash('Your new date has been submitted for review. We will confirm within 24 hours.')
+            else:
+                flash('Your booking has been updated!')
             db.session.commit()
-            flash('Your booking has been updated!')
             return redirect(url_for('portal'))
         return render_template('edit_booking.html', booking=booking)
     

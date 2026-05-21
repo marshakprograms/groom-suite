@@ -63,14 +63,15 @@ body {
 
 /* FLASH */
 .flash {
-  background: rgba(201,168,76,0.15);
-  border-left: 4px solid var(--gold);
-  padding: 1.2rem 2rem;
-  font-size: 0.95rem;
+  background: rgba(201,168,76,0.25);
+  border-left: 6px solid var(--gold);
+  border-right: 6px solid var(--gold);
+  padding: 1.5rem 2rem;
+  font-size: 1rem;
   color: var(--gold);
   text-align: center;
   letter-spacing: 0.03em;
-  font-weight: 500;
+  font-weight: 600;
 }
 .flash a { color: var(--gold); font-weight: 600; }
 .flash strong { color: var(--white); font-weight: 700; font-size: 1.05rem; }

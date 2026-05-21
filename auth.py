@@ -19,7 +19,9 @@ def register_routes(app, login_manager):
             if user and check_password_hash(user.password, password):
                 login_user(user)
                 if user.role == 'admin':
-                    return redirect(url_for('index'))
+                    return redirect(url_for('admin_dashboard'))
+                if not user.password_changed:
+                    return redirect(url_for('change_password'))
                 return redirect(url_for('portal'))
             flash('Invalid email or password')
         return render_template('login.html')
