@@ -67,7 +67,8 @@ def register_routes(app, mail):
         if current_user.role == "admin":
             return redirect(url_for("admin_dashboard"))
         booking = Booking.query.filter_by(user_id=current_user.id).first()
-        return render_template("portal.html", booking=booking)
+        added = request.args.get("added")
+        return render_template("portal.html", booking=booking, added=added)
 
     @app.route("/portal/add-member", methods=["POST"])
     @login_required
@@ -88,7 +89,7 @@ def register_routes(app, mail):
                 )
                 db.session.add(member)
                 db.session.commit()
-                flash("Party member added!")
+                return redirect(url_for("portal", added=name))
         return redirect(url_for("portal"))
 
     @app.route("/portal/remove-member/<int:id>")

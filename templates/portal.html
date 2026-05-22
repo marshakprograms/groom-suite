@@ -167,34 +167,59 @@
     {% else %}
       <p style="color:var(--white-dim);font-size:0.75rem;margin-bottom:1rem;">No party members added yet.</p>
     {% endif %}
-    <form method="POST" action="{{ url_for('add_member') }}" style="margin-top:1.5rem;">
-      <div class="form-row">
-        <div class="form-field">
-          <label>Name</label>
-          <input type="text" name="member_name" placeholder="Groomsman name" required>
+    {% set last_flash = get_flashed_messages() %}
+    {% for msg in last_flash %}
+      {% if msg.startswith('CONFIRM:') %}
+        {% set added_name = msg[8:] %}
+        <div class="flash" style="margin-top:1.5rem;text-align:left;padding:1.5rem;">
+          ✓ <strong>{{ added_name }}</strong> has been added to your party!<br>
+          <span style="font-size:0.8rem;color:var(--white-dim);">Would you like to add another member?</span>
+          <div style="display:flex;gap:1rem;margin-top:1rem;">
+            <button onclick="document.getElementById('add-form').style.display='block';this.parentElement.parentElement.parentElement.style.display='none'" class="btn-gold" style="width:auto;padding:0.55rem 1.5rem;">Yes, Add Another</button>
+            <a href="{{ url_for('portal') }}" class="btn-outline" style="padding:0.55rem 1.5rem;">No, Save My Party</a>
+          </div>
         </div>
-        <div class="form-field">
-          <label>Role</label>
-          <select name="member_role" required>
-            <option value="" disabled selected>— Select role —</option>
-            <option value="Groom">Groom</option>
-            <option value="Best Man">Best Man</option>
-            <option value="Groomsman">Groomsman</option>
-            <option value="Father of Groom">Father of Groom</option>
-            <option value="Father of Bride">Father of Bride</option>
-            <option value="Ring Bearer">Ring Bearer</option>
-            <option value="VIP Guest">VIP Guest</option>
-          </select>
-        </div>
-      </div>
+      {% endif %}
+    {% endfor %}
 
-      <button type="submit" class="btn-gold" style="width:auto;padding:0.55rem 1.5rem;">Add Member</button>
-    </form>
-    {% if booking.party_members %}
-    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid rgba(201,168,76,0.1);">
-      <a href="{{ url_for('portal') }}" class="btn-gold" style="width:auto;padding:0.55rem 1.5rem;">✓ Save</a>
+    {% if added %}
+    <div class="flash" style="margin-top:1.5rem;text-align:left;padding:1.5rem;">
+      ✓ <strong>{{ added }}</strong> has been added to your party!<br>
+      <span style="font-size:0.8rem;color:var(--white-dim);">Would you like to add another member?</span>
+      <div style="display:flex;gap:1rem;margin-top:1rem;flex-wrap:wrap;">
+        <button onclick="document.getElementById('add-form').style.display='block';this.closest('.flash').style.display='none'" class="btn-gold" style="width:auto;padding:0.55rem 1.5rem;">Yes, Add Another</button>
+        <a href="{{ url_for('portal') }}" class="btn-outline" style="padding:0.55rem 1.5rem;">No, Save My Party</a>
+      </div>
     </div>
+    <div id="add-form" style="display:none;margin-top:1.5rem;">
+    {% else %}
+    <div id="add-form" style="margin-top:1.5rem;">
     {% endif %}
+      <form method="POST" action="{{ url_for('add_member') }}">
+        <div class="form-row">
+          <div class="form-field">
+            <label>Name</label>
+            <input type="text" name="member_name" placeholder="Groomsman name" required>
+          </div>
+          <div class="form-field">
+            <label>Role</label>
+            <select name="member_role" required>
+              <option value="" disabled selected>— Select role —</option>
+              <option value="Groom">Groom</option>
+              <option value="Best Man">Best Man</option>
+              <option value="Groomsman">Groomsman</option>
+              <option value="Father of Groom">Father of Groom</option>
+              <option value="Father of Bride">Father of Bride</option>
+              <option value="Ring Bearer">Ring Bearer</option>
+              <option value="VIP Guest">VIP Guest</option>
+            </select>
+          </div>
+        </div>
+        <div style="margin-top:1rem;">
+          <button type="submit" class="btn-gold" style="width:auto;padding:0.55rem 1.5rem;">Add Member</button>
+        </div>
+      </form>
+    </div>
   </div>
   {% endif %}
 
