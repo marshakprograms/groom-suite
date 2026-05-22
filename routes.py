@@ -6,6 +6,7 @@ from flask_mail import Message as MailMessage
 from flask import current_app
 import random
 import string
+import stripe
 
 
 def admin_required(f):
@@ -421,3 +422,113 @@ def register_routes(app, mail):
     @app.route('/services')
     def services():
         return render_template('services.html')
+    
+    @app.route('/portal/pay-deposit')
+    @login_required
+    def pay_deposit():
+        booking = Booking.query.filter_by(user_id=current_user.id).first()
+        if not booking:
+            return redirect(url_for('portal'))
+
+        stripe.api_key = current_app.config['STRIPE_SECRET_KEY']
+
+        member_count = len(booking.party_members)
+        if booking.party_size == 1:
+            total = 500
+        elif booking.party_size <= 4:
+            total = 1200
+        else:
+            additional = max(0, member_count - 4) * 300
+            total = 1200 + additional
+
+        deposit = int(total * 0.5)
+
+        customer = stripe.Customer.create(
+            email=current_user.email,
+            name=current_user.name,
+            metadata={'booking_id': booking.id, 'user_id': current_user.id}
+        )
+
+        booking.stripe_customer_id = customer.id
+        db.session.commit()
+
+        session = stripe.checkout.Session.create(
+            customer=customer.id,
+            payment_method_types=['card'],
+            line_items=[{
+                'price_data': {
+                    'currency': 'usd',
+                    'product_data': {
+                        'name': 'Lux Head Space — 50% Deposit',
+                        'description': f'Wedding grooming deposit for {booking.wedding_date} at {booking.venue}',
+                    },
+                    'unit_amount': deposit * 100,
+                },
+                'quantity': 1,
+            }],
+            mode='payment',
+            payment_intent_data={
+                'setup_future_usage': 'off_session',
+                'capture_method': 'automatic',
+            },
+            success_url=url_for('payment_success', _external=True),
+            cancel_url=url_for('portal', _external=True),
+        )
+        return redirect(session.url, code=303)
+
+    @app.route('/payment-success')
+    @login_required
+    def payment_success():
+        booking = Booking.query.filter_by(user_id=current_user.id).first()
+        if booking:
+            booking.status = 'deposit_paid'
+            stripe.api_key = current_app.config['STRIPE_SECRET_KEY']
+            try:
+                customer_id = booking.stripe_customer_id
+                payment_methods = stripe.PaymentMethod.list(
+                    customer=customer_id,
+                    type='card'
+                )
+                if payment_methods.data:
+                    booking.deposit_amount = payment_methods.data[0].id
+            except Exception as e:
+                print(f'Payment method save error: {e}')
+            db.session.commit()
+        flash('Your deposit has been received! Your booking is confirmed.')
+        return redirect(url_for('portal'))
+    
+    @app.route('/admin/booking/<int:id>/charge-remaining')
+    @login_required
+    @admin_required
+    def charge_remaining(id):
+        booking = Booking.query.get_or_404(id)
+        stripe.api_key = current_app.config['STRIPE_SECRET_KEY']
+        try:
+            member_count = len(booking.party_members)
+            if booking.party_size == 1:
+                total = 500
+            elif booking.party_size <= 4:
+                total = 1200
+            else:
+                additional = max(0, member_count - 4) * 300
+                total = 1200 + additional
+            remaining = int(total * 0.5)
+            if not booking.deposit_amount:
+                flash('ALERT: No saved card found for this customer. Please ask the client to re-enter their payment details.')
+                return redirect(url_for('booking_detail', id=booking.id))
+            payment_intent = stripe.PaymentIntent.create(
+                amount=remaining * 100,
+                currency='usd',
+                customer=booking.stripe_customer_id,
+                payment_method=booking.deposit_amount,
+                confirm=True,
+                off_session=True,
+            )
+            booking.status = 'completed'
+            db.session.commit()
+            flash(f'Remaining balance of ${remaining} charged successfully!')
+        except Exception as e:
+            flash(f'ALERT: Payment failed — {str(e)}')
+        return redirect(url_for('booking_detail', id=booking.id))
+    
+

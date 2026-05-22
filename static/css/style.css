@@ -210,6 +210,11 @@ body {
   outline: none;
   transition: border-color 0.2s;
 }
+.form-field input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  cursor: pointer;
+  transform: scale(1.4);
+}
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus { border-color: var(--gold); }
@@ -463,6 +468,10 @@ a.feature-item:hover {
   font-weight: 300;
 }
 .bookings-table tr:hover td { background: rgba(201,168,76,0.03); }
+.row-confirmed td { background: rgba(46,204,113,0.12) !important; }
+.row-rejected td { background: rgba(150,150,150,0.12) !important; }
+.row-cancelled td { background: rgba(150,150,150,0.12) !important; }
+.row-pending td { background: transparent; }
 .client-name { font-weight: 500; font-size: 0.8rem; }
 .client-email { font-size: 0.65rem; color: var(--white-dim); margin-top: 2px; }
 .badge {
@@ -476,10 +485,16 @@ a.feature-item:hover {
   font-weight: 600;
   border: 1px solid;
 }
-.badge-confirmed { border-color: rgba(46,204,113,0.4); color: #2ecc71; background: rgba(46,204,113,0.07); }
+.badge-confirmed { border-color: rgba(46,204,113,0.4); color: #2ecc71; background: rgba(46,204,113,0.15); }
 .badge-pending   { border-color: rgba(201,168,76,0.4); color: var(--gold); background: rgba(201,168,76,0.07); }
-.badge-rejected  { border-color: rgba(231,76,60,0.4); color: #e74c3c; background: rgba(231,76,60,0.07); }
+.badge-rejected  { border-color: rgba(150,150,150,0.4); color: #999; background: rgba(150,150,150,0.07); }
 .badge-cancelled { border-color: rgba(150,150,150,0.4); color: #999; background: rgba(150,150,150,0.07); }
+.badge-deposit_paid { border-color: rgba(46,204,113,0.4); color: #2ecc71; background: rgba(46,204,113,0.2); }
+.status-deposit_paid { border-color: rgba(46,204,113,0.4); color: #2ecc71; background: rgba(46,204,13,0.2); }
+.row-deposit_paid td { background: rgba(46,204,113,0.08) !important; }
+.badge-completed { border-color: rgba(201,168,76,0.4); color: var(--gold); background: rgba(201,168,76,0.15); }
+.status-completed { border-color: rgba(201,168,76,0.4); color: var(--gold); background: rgba(201,168,76,0.15); }
+.row-completed td { background: rgba(201,168,76,0.08) !important; }
 .status-cancelled { border-color: rgba(150,150,150,0.4); color: #999; background: rgba(150,150,150,0.08); }
 .action-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; }
 .action-btn {
@@ -861,11 +876,9 @@ a.feature-item:hover {
   color: var(--gold);
   font-weight: 500;
 }
-.conflict-row {
-  background: rgba(231,76,60,0.4) !important;
-  border-left: 3px solid #e74c3c;
-}
-.conflict-row:hover { background: rgba(231,76,60,0.5) !important; }
+.conflict-row td { background: rgba(231,76,60,0.4) !important; }
+.conflict-row td:first-child { border-left: 3px solid #e74c3c; }
+.conflict-row:hover td { background: rgba(231,76,60,0.5) !important; }
 
 /* ══════════════════════════════════════
    RESPONSIVE — MOBILE

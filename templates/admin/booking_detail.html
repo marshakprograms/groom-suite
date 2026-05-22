@@ -14,6 +14,9 @@
     <a href="{{ url_for('reject_booking', id=booking.id) }}" class="btn-outline" style="padding:0.55rem 1.5rem;">Reject</a>
     {% elif booking.status == 'confirmed' %}
     <a href="{{ url_for('admin_cancel_booking', id=booking.id) }}" class="btn-outline" style="padding:0.55rem 1.5rem;border-color:#e74c3c;color:#e74c3c;">Cancel Booking</a>
+    {% elif booking.status == 'deposit_paid' %}
+    <a href="{{ url_for('charge_remaining', id=booking.id) }}" class="btn-gold" style="width:auto;padding:0.55rem 1.5rem;">💳 Charge Remaining Balance</a>
+    <a href="{{ url_for('admin_cancel_booking', id=booking.id) }}" class="btn-outline" style="padding:0.55rem 1.5rem;border-color:#e74c3c;color:#e74c3c;">Cancel Booking</a>
     {% endif %}
     <a href="{{ url_for('admin_messages', id=booking.id) }}" class="btn-outline" style="padding:0.55rem 1.5rem;">Messages</a>
     <a href="{{ url_for('admin_dashboard') }}" class="btn-ghost">← Back</a>

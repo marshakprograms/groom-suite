@@ -26,6 +26,8 @@ class Booking(db.Model):
     addons = db.Column(db.String(200))
     notes = db.Column(db.Text)
     status = db.Column(db.String(20), default="pending")
+    stripe_customer_id = db.Column(db.String(100), nullable=True)
+    deposit_amount = db.Column(db.Integer, nullable=True)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
     party_members = db.relationship("PartyMember", backref="booking", lazy=True)

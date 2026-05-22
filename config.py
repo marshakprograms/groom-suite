@@ -15,3 +15,5 @@ class Config:
     MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
     BARBER_PHONE = os.getenv("BARBER_PHONE")
     BARBER_EMAIL = os.getenv("BARBER_EMAIL")
+    STRIPE_PUBLISHABLE_KEY = os.getenv('STRIPE_PUBLISHABLE_KEY')
+    STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY')

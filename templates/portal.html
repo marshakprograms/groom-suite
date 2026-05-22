@@ -18,6 +18,8 @@
       <p class="portal-status-msg" style="color:var(--gold);">Your booking is under review. We'll confirm within 24 hours.</p>
       {% elif booking.status == 'confirmed' %}
       <p class="portal-status-msg" style="color:#2ecc71;">You're confirmed! Add or update your party members as needed and check your messages.</p>
+      {% elif booking.status == 'deposit_paid' %}
+      <p class="portal-status-msg" style="color:#2ecc71;">✓ Deposit received! Your booking is locked in. We'll see you on your big day!</p>
       {% elif booking.status == 'rejected' %}
       <p class="portal-status-msg" style="color:#e74c3c;">Unfortunately we're unavailable for your date. Please contact us to reschedule.</p>
       {% elif booking.status == 'cancelled' %}
@@ -31,6 +33,9 @@
       <span class="status-dot"></span>
       {{ booking.status|capitalize }}
     </div>
+    {% if booking.status == 'confirmed' %}
+    <a href="{{ url_for('pay_deposit') }}" class="btn-gold" style="padding:0.4rem 1rem;font-size:0.6rem;">💳 Pay Deposit</a>
+    {% endif %}
     <a href="{{ url_for('edit_booking') }}" class="btn-outline" style="padding:0.4rem 1rem;font-size:0.6rem;">Edit Booking</a>
     <a href="{{ url_for('portal_messages') }}" class="btn-outline" style="padding:0.4rem 1rem;font-size:0.6rem;">Messages {% if unread_count > 0 %}<span class="unread-badge">{{ unread_count }}</span>{% endif %}</a>
     {% if booking.status != 'cancelled' %}
