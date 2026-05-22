@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block title %}Our Services — Lux Head Space Mobile Barber Concierge{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <div>
+    <h1 class="admin-title">Our <span>Services</span></h1>
+    <p class="admin-meta">Premium grooming packages for every member of your party</p>
+  </div>
+  <a href="{{ url_for('index') }}" class="btn-ghost">← Back to Home</a>
+</div>
+
+<div class="feature-page-wrapper">
+  <div class="feature-page-content">
+    <p class="section-eyebrow">Grooming Packages</p>
+    <h2 class="feature-page-title">The Complete <em>Service Menu</em></h2>
+    <div class="gold-line-left"></div>
+    <p class="feature-page-body">Every member of your wedding party deserves to look their absolute best. Choose the package that fits each man's style — from a classic cut to the full luxury experience.</p>
+
+    <div class="feature-highlights">
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">✂</div>
+        <div>
+          <div class="feature-highlight-title">The Classic — Cut Only <span style="color:var(--gold);float:right;">$55</span></div>
+          <div class="feature-highlight-desc">Precision cut tailored to your face shape and wedding aesthetic.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◈</div>
+        <div>
+          <div class="feature-highlight-title">The Sharp — Cut + Beard <span style="color:var(--gold);float:right;">$110</span></div>
+          <div class="feature-highlight-desc">Cut and beard grooming for a clean, defined, photo-ready finish.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">✦</div>
+        <div>
+          <div class="feature-highlight-title">The Groom — Cut + Beard + Shave <span style="color:var(--gold);float:right;">$150</span></div>
+          <div class="feature-highlight-desc">The full experience — cut, beard grooming, and straight razor shave for the smoothest finish.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">❖</div>
+        <div>
+          <div class="feature-highlight-title">The Debonair — Cut + Mustache <span style="color:var(--gold);float:right;">$85</span></div>
+          <div class="feature-highlight-desc">Precision cut with mustache grooming and shaping for a sharp, polished look.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◉</div>
+        <div>
+          <div class="feature-highlight-title">The Distinguished — Cut + Beard + Mustache <span style="color:var(--gold);float:right;">$125</span></div>
+          <div class="feature-highlight-desc">The complete look — cut, beard, and mustache grooming for the modern distinguished gentleman.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">✦</div>
+        <div>
+          <div class="feature-highlight-title">The Bald & Bold — Head Shave + Beard <span style="color:var(--gold);float:right;">$110</span></div>
+          <div class="feature-highlight-desc">Full head shave with beard grooming — clean, sharp, and photo-ready.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◈</div>
+        <div>
+          <div class="feature-highlight-title">The Bald & Sharp — Head Shave + Mustache <span style="color:var(--gold);float:right;">$85</span></div>
+          <div class="feature-highlight-desc">Full head shave with mustache grooming for a clean, defined finish.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">❖</div>
+        <div>
+          <div class="feature-highlight-title">The Clean Shave — Head Shave Only <span style="color:var(--gold);float:right;">$55</span></div>
+          <div class="feature-highlight-desc">A smooth, precise head shave for the man who keeps it clean and simple.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">◈</div>
+        <div>
+          <div class="feature-highlight-title">Beard Only <span style="color:var(--gold);float:right;">$65</span></div>
+          <div class="feature-highlight-desc">Full beard grooming, shaping, and line-up for a clean defined finish.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">✦</div>
+        <div>
+          <div class="feature-highlight-title">Mustache Only <span style="color:var(--gold);float:right;">$35</span></div>
+          <div class="feature-highlight-desc">Mustache trim and shaping for a polished, well-groomed finish.</div>
+        </div>
+      </div>
+      <div class="feature-highlight-item">
+        <div class="feature-highlight-icon">✂</div>
+        <div>
+          <div class="feature-highlight-title">Kids Cut <span style="color:var(--gold);float:right;">$45</span></div>
+          <div class="feature-highlight-desc">Precision cut for the little ones in the wedding party — ring bearers welcome!</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:3rem;">
+      <a href="{{ url_for('inquiry') }}" class="btn-gold" style="margin-right:1rem;">Book Your Experience</a>
+      <a href="{{ url_for('index') }}" class="btn-outline">Back to Home</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

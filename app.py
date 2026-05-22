@@ -15,12 +15,19 @@ mail.init_app(app)
 from datetime import datetime
 
 
+import re
+
 @app.template_filter("format_date")
 def format_date(value):
     try:
         return datetime.strptime(value, "%Y-%m-%d").strftime("%B %d, %Y")
     except:
         return value
+
+@app.template_filter("extract_price")
+def extract_price(value):
+    match = re.search(r"\$(\d+)", value)
+    return int(match.group(1)) if match else 0
 
 
 login_manager = LoginManager(app)

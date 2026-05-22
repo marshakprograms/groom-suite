@@ -81,11 +81,10 @@ def register_routes(app, mail):
                 )
                 return redirect(url_for("portal"))
             name = request.form.get("member_name")
-            service = request.form.get("member_service")
-            if name and service:
+            if name:
                 role = request.form.get("member_role", "Groomsman")
                 member = PartyMember(
-                    name=name, role=role, service=service, booking_id=booking.id
+                    name=name, role=role, service="Full Service", booking_id=booking.id
                 )
                 db.session.add(member)
                 db.session.commit()
@@ -216,14 +215,12 @@ def register_routes(app, mail):
             old_date = booking.wedding_date
             new_date = request.form.get("wedding_date")
             booking.wedding_date = new_date
-            booking.start_time = request.form.get("start_time")
-            booking.venue = request.form.get("venue")
-            booking.party_size = int(request.form.get("party_size"))
-            booking.package = request.form.get("package")
-            booking.addons = request.form.get("addons")
-            booking.notes = request.form.get("notes")
-            current_user.name = request.form.get("name")
-            current_user.phone = request.form.get("phone")
+            booking.venue = request.form.get('venue')
+            booking.start_time = request.form.get('start_time')
+            booking.party_size = int(request.form.get('party_size'))
+            booking.notes = request.form.get('notes')
+            current_user.name = request.form.get('name')
+            current_user.phone = request.form.get('phone')
             if booking.status == "rejected" and new_date != old_date:
                 booking.status = "pending"
                 try:
@@ -419,3 +416,7 @@ def register_routes(app, mail):
                 print(f"Cancel notification failed: {e}")
             flash("Your booking has been cancelled. Please contact us to reschedule.")
         return redirect(url_for("portal"))
+    
+    @app.route('/services')
+    def services():
+        return render_template('services.html')
